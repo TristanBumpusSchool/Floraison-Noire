@@ -1,0 +1,11 @@
+
+1. snake case
+2. no caps
+3. names must make sense
+4. script order :
+	1. variable
+	2. function
+	3. built in functions
+	4. public functions
+
+5. keep spaces between functions and categories
