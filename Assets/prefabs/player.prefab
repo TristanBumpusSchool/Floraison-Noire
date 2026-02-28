@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7333653910496310863}
   m_Layer: 0
   m_Name: player
-  m_TagString: Player
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093dd01a90077b94f8caae09fc69e78c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 10
+  speed: 0
+  max_speed: 10
+  decceleration: 10
+  speed_modifiyer: 1
+  dash_speed: 50
   jump_force: 100
   jump_time: 0.1
   on_floor: 0
@@ -87,6 +91,8 @@ MonoBehaviour:
   hp_script: {fileID: 3516060842015321950}
   base_damage: 1
   damage_script: {fileID: 7910000954636903962}
+  max_stamina: 100
+  reacharge_speed: 1
   cam: {fileID: 8143097061974944728}
   mouseSensitivity: 2
 --- !u!114 &6210580700931147610
@@ -162,6 +168,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cd6d8272-23e1-481c-a670-448042fa2607
     m_ActionName: 'player/attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6215560188972187783}
+        m_TargetAssemblyTypeName: player_movement, Assembly-CSharp
+        m_MethodName: on_sprint_dash_input
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0b68589d-5187-4865-930a-85ab6773d4f3
+    m_ActionName: 'player/dash_sprint[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -488,7 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3955171d3a8c3419fb529f48e0530d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage_system
-  parent_script: {fileID: 0}
   damage: 1
 --- !u!1 &2903701381969472554
 GameObject:

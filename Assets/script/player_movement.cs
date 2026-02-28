@@ -9,7 +9,11 @@ public class player_movement : MonoBehaviour
 
     //Movement
     [Header("Movement")]
-    public float speed = 100;
+    public float speed = 0;
+    public float max_speed = 100;
+    public float decceleration = 1;
+    public float speed_modifiyer = 1;
+    public float dash_speed = 100;
 
     public float jump_force = 10;
     public float jump_time = 1;
@@ -74,9 +78,16 @@ public class player_movement : MonoBehaviour
 
     void movement()
     {
+        if (speed > max_speed) {
+            speed -= decceleration;
+        }
+        else
+        {
+            speed = max_speed;
+        }
         Vector3 move_direction = transform.forward * direction.y + transform.right * direction.x;
         move_direction += new Vector3(0, jump_direction * jump_force, 0);
-        rb.linearVelocity = move_direction.normalized * speed;
+        rb.linearVelocity = move_direction.normalized * speed * speed_modifiyer;
     }
 
     void floor_detection()
@@ -143,6 +154,19 @@ public class player_movement : MonoBehaviour
             attacking = true;
             GetComponent<Animator>().SetBool("attack", attacking);
             Invoke("end_attack", .5f);
+        }
+    }
+
+    public void on_sprint_dash_input(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            speed = dash_speed;
+            speed_modifiyer = 2;
+        }
+        if (context.canceled)
+        {
+            speed_modifiyer = 1;
         }
     }
 }
