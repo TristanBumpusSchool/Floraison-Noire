@@ -19,13 +19,17 @@ public class enemy_ai : MonoBehaviour
     public float base_damage = 1;
     public damage_system damage_script;
 
+    [Header("Range")]
+    public float attack_range = 2;
+    public float follow_range = 10;
+
     void state_manager()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 2 || GetComponent<Animator>().GetBool("attack"))
+        if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
             current_state = 3;
         }
-        else if (Vector3.Distance(player.transform.position, transform.position) < 10)
+        else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
             current_state = 2;
         }
@@ -43,7 +47,7 @@ public class enemy_ai : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (current_state == 2)
         {
@@ -70,5 +74,10 @@ public class enemy_ai : MonoBehaviour
 
         state_manager();
 
+    }
+
+    public void end_attack()
+    {
+        GetComponent<Animator>().SetBool("attack", false);
     }
 }

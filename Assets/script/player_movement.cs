@@ -20,6 +20,8 @@ public class player_movement : MonoBehaviour
 
     public bool on_floor = false;
 
+    public wall_detection wall_detecter;
+
     int jump_direction = 0;
     Vector2 direction;
 
@@ -86,8 +88,9 @@ public class player_movement : MonoBehaviour
             speed = max_speed;
         }
         Vector3 move_direction = transform.forward * direction.y + transform.right * direction.x;
+        move_direction = move_direction.normalized;
         move_direction += new Vector3(0, jump_direction * jump_force, 0);
-        rb.linearVelocity = move_direction.normalized * speed * speed_modifiyer;
+        rb.linearVelocity = move_direction * speed * speed_modifiyer;
     }
 
     void floor_detection()
@@ -110,6 +113,7 @@ public class player_movement : MonoBehaviour
     }
 
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -117,7 +121,7 @@ public class player_movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         update_scripts();
@@ -136,7 +140,7 @@ public class player_movement : MonoBehaviour
 
     public void on_jump_input(InputAction.CallbackContext context)
     {
-        if (on_floor)
+        if (on_floor & context.performed)
         {
             jump_direction = 1;
             Invoke("end_jump", jump_time);
