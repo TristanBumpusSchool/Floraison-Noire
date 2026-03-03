@@ -42,6 +42,7 @@ public class enemy_ai : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GetComponent<NavMeshAgent>().enabled = true;
         player = GameObject.FindWithTag("player");
         print(transform.position);
     }
@@ -49,6 +50,7 @@ public class enemy_ai : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //GetComponent<NavMeshAgent>().enabled = true;
         if (current_state == 2)
         {
             GetComponent<NavMeshAgent>().destination = player.transform.position;
