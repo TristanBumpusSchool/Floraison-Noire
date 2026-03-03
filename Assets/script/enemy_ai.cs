@@ -43,7 +43,7 @@ public class enemy_ai : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("player");
-        print(player);
+        print(transform.position);
     }
 
     // Update is called once per frame

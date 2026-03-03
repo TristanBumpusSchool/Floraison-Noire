@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,6 +47,8 @@ public class player_movement : MonoBehaviour
     //Attack related
     [Header("Attack")]
     bool attacking = false;
+    
+
 
     public void end_attack()
     {
@@ -153,11 +156,14 @@ public class player_movement : MonoBehaviour
 
     public void on_attack_input(InputAction.CallbackContext context)
     {
-        if (!attacking & context.performed)
+        if (Time.timeScale == 1)
         {
-            attacking = true;
-            GetComponent<Animator>().SetBool("attack", attacking);
-            Invoke("end_attack", .5f);
+            if (!attacking & context.performed)
+            {
+                attacking = true;
+                GetComponent<Animator>().SetBool("attack", attacking);
+                Invoke("end_attack", .5f);
+            }
         }
     }
 
