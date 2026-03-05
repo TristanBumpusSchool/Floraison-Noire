@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 68983205}
   m_Layer: 0
   m_Name: murs (9)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 146556629}
   m_Layer: 0
   m_Name: murs (30)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1187,7 +1187,7 @@ GameObject:
   - component: {fileID: 380438625}
   m_Layer: 0
   m_Name: murs (7)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 415229605}
   m_Layer: 0
   m_Name: murs (19)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1520,7 +1520,7 @@ GameObject:
   - component: {fileID: 418151744}
   m_Layer: 0
   m_Name: murs (11)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1631,7 +1631,7 @@ GameObject:
   - component: {fileID: 418472042}
   m_Layer: 0
   m_Name: murs (35)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1927,7 +1927,7 @@ GameObject:
   - component: {fileID: 457307957}
   m_Layer: 0
   m_Name: murs (14)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2260,7 +2260,7 @@ GameObject:
   - component: {fileID: 532860708}
   m_Layer: 0
   m_Name: murs (25)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2539,7 +2539,7 @@ GameObject:
   - component: {fileID: 628350946}
   m_Layer: 0
   m_Name: murs (31)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2724,7 +2724,7 @@ GameObject:
   - component: {fileID: 662130573}
   m_Layer: 0
   m_Name: murs (28)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2939,7 +2939,7 @@ GameObject:
   - component: {fileID: 705268730}
   m_Layer: 0
   m_Name: murs (12)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3144,7 +3144,7 @@ GameObject:
   - component: {fileID: 761432274}
   m_Layer: 0
   m_Name: murs
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3255,7 +3255,7 @@ GameObject:
   - component: {fileID: 779010756}
   m_Layer: 0
   m_Name: murs (33)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3428,7 +3428,7 @@ GameObject:
   - component: {fileID: 797414585}
   m_Layer: 0
   m_Name: murs (17)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3539,7 +3539,7 @@ GameObject:
   - component: {fileID: 800072051}
   m_Layer: 0
   m_Name: murs (8)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3868,7 +3868,7 @@ GameObject:
   - component: {fileID: 861711652}
   m_Layer: 0
   m_Name: murs (32)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4115,7 +4115,7 @@ GameObject:
   - component: {fileID: 890363833}
   m_Layer: 0
   m_Name: murs (23)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4258,7 +4258,7 @@ GameObject:
   - component: {fileID: 915544956}
   m_Layer: 0
   m_Name: murs (34)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4369,7 +4369,7 @@ GameObject:
   - component: {fileID: 940235787}
   m_Layer: 0
   m_Name: murs (22)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4480,7 +4480,7 @@ GameObject:
   - component: {fileID: 957221039}
   m_Layer: 0
   m_Name: murs (10)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4796,7 +4796,7 @@ GameObject:
   - component: {fileID: 1017363680}
   m_Layer: 0
   m_Name: murs (21)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5187,7 +5187,7 @@ GameObject:
   - component: {fileID: 1069863329}
   m_Layer: 0
   m_Name: murs (1)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5462,7 +5462,7 @@ GameObject:
   - component: {fileID: 1215502871}
   m_Layer: 0
   m_Name: murs (27)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5573,7 +5573,7 @@ GameObject:
   - component: {fileID: 1232823485}
   m_Layer: 0
   m_Name: murs (18)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5746,7 +5746,7 @@ GameObject:
   - component: {fileID: 1352213299}
   m_Layer: 0
   m_Name: murs (16)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5857,7 +5857,7 @@ GameObject:
   - component: {fileID: 1365276268}
   m_Layer: 0
   m_Name: murs (2)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5968,7 +5968,7 @@ GameObject:
   - component: {fileID: 1419280664}
   m_Layer: 0
   m_Name: murs (13)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6079,7 +6079,7 @@ GameObject:
   - component: {fileID: 1423590090}
   m_Layer: 0
   m_Name: murs (3)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6195,7 +6195,7 @@ GameObject:
   - component: {fileID: 1714558588}
   m_Layer: 0
   m_Name: murs (5)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6413,7 +6413,7 @@ GameObject:
   - component: {fileID: 1825616101}
   m_Layer: 0
   m_Name: murs (24)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6524,7 +6524,7 @@ GameObject:
   - component: {fileID: 1848818862}
   m_Layer: 0
   m_Name: murs (37)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6774,7 +6774,7 @@ GameObject:
   - component: {fileID: 1904281562}
   m_Layer: 0
   m_Name: murs (20)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6885,7 +6885,7 @@ GameObject:
   - component: {fileID: 1908847177}
   m_Layer: 0
   m_Name: murs (26)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7102,7 +7102,7 @@ GameObject:
   - component: {fileID: 1928056900}
   m_Layer: 0
   m_Name: murs (4)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7213,7 +7213,7 @@ GameObject:
   - component: {fileID: 1938834387}
   m_Layer: 0
   m_Name: murs (29)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7324,7 +7324,7 @@ GameObject:
   - component: {fileID: 1951739075}
   m_Layer: 0
   m_Name: murs (36)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7595,7 +7595,7 @@ GameObject:
   - component: {fileID: 1995642688}
   m_Layer: 0
   m_Name: murs
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7706,7 +7706,7 @@ GameObject:
   - component: {fileID: 2027762185}
   m_Layer: 0
   m_Name: murs (15)
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8136,7 +8136,7 @@ GameObject:
   - component: {fileID: 2119984018}
   m_Layer: 0
   m_Name: murs
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

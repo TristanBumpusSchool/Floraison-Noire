@@ -30,9 +30,8 @@ public class collectable : MonoBehaviour
         if(other.tag == "player")
         {
             Instantiate(menu_to_create);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
             Destroy(gameObject);
+            general_manager.pausible_menu_open += 1;
         }
     }
 }

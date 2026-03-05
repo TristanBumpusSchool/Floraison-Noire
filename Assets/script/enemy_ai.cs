@@ -7,7 +7,7 @@ public class enemy_ai : MonoBehaviour
     //Diffrent states : 1 = idle/wander 2 = fallow player, 3 = attack
     public int current_state = 1;
 
-    
+
 
     GameObject player;
 
@@ -23,6 +23,10 @@ public class enemy_ai : MonoBehaviour
     public float attack_range = 2;
     public float follow_range = 10;
 
+
+    /// <summary>
+    /// Switchs between the diffrent stats of the enemy
+    /// </summary>
     void state_manager()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
@@ -61,7 +65,8 @@ public class enemy_ai : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().speed = 0;
         }
-        if (current_state == 3) {
+        if (current_state == 3)
+        {
             GetComponent<Animator>().SetBool("attack", true);
             transform.LookAt(player.transform.position);
         }
@@ -70,9 +75,9 @@ public class enemy_ai : MonoBehaviour
             GetComponent<Animator>().SetBool("attack", false);
         }
 
-        
 
-        
+
+
 
         state_manager();
 

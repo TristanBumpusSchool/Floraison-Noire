@@ -6,8 +6,8 @@ public class upgrade_card : MonoBehaviour
 
     public TextMeshProUGUI card_name;
     public TextMeshProUGUI card_disc;
+    public int upgrade_effect_id;
 
-    GameObject loot_table_manager;
     GameObject player;
     public GameObject parent;
 
@@ -19,9 +19,6 @@ public class upgrade_card : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("player");
-        loot_table_manager = GameObject.FindWithTag("loot_table_manager");
-        Debug.Log(loot_table_manager.GetComponent<loot_table>().upgrade_loot_table());
-        upgrade_selected = Instantiate(loot_table_manager.GetComponent<loot_table>().upgrade_loot_table(),transform);
         
         card_name.text = upgrade_selected.GetComponent<upgrades_items>().upgrade_name;
         card_disc.text = upgrade_selected.GetComponent<upgrades_items>().upgrade_desc;
@@ -40,10 +37,13 @@ public class upgrade_card : MonoBehaviour
         {
             player.GetComponent<player_movement>().max_health += upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
         }
+        if (upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id == 2)
+        {
+            player.GetComponent<player_movement>().base_damage += upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
+        }
 
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
         Destroy(parent);
+        general_manager.pausible_menu_open -= 1;
     }
 
 }

@@ -829,6 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::upgrade_card
   card_name: {fileID: 8769528378301385972}
   card_disc: {fileID: 1918631854904952083}
+  upgrade_effect_id: 0
   parent: {fileID: 5117995641032496362}
   upgrade_selected: {fileID: 0}
 --- !u!1 &4565169893739944045
@@ -980,6 +981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::upgrade_card
   card_name: {fileID: 35060963926074560}
   card_disc: {fileID: 1779479441061195889}
+  upgrade_effect_id: 0
   parent: {fileID: 5117995641032496362}
   upgrade_selected: {fileID: 0}
 --- !u!1 &5117995641032496362
@@ -1028,6 +1030,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrade_menu_script
   parent: {fileID: 0}
+  loot_table_manager: {fileID: 0}
+  upgrade_cards:
+  - {fileID: 9157583734132492099}
+  - {fileID: 4565169893739944045}
+  - {fileID: 3500132078832829232}
+  upgrade_to_apply: []
 --- !u!1 &5158445829886186665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,5 +1505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::upgrade_card
   card_name: {fileID: 3673048619942459816}
   card_disc: {fileID: 1162556751539928455}
+  upgrade_effect_id: 0
   parent: {fileID: 5117995641032496362}
   upgrade_selected: {fileID: 0}

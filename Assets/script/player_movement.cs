@@ -15,16 +15,31 @@ public class player_movement : MonoBehaviour
     public float decceleration = 1;
     public float speed_modifiyer = 1;
     public float dash_speed = 100;
+    Vector2 direction;
 
+    [Header("Jump")]
+    //Jump realated
     public float jump_force = 10;
     public float jump_time = 1;
+    public float jump_buffer = .1f;
+    public float coyote_time = .1f;
 
     public bool on_floor = false;
+    bool will_jump = false;
+    public bool can_coyote_jump = false;
 
     public wall_detection wall_detecter;
 
-    int jump_direction = 0;
-    Vector2 direction;
+    float jump_direction = 0;
+    
+    bool can_wall_jump = false;
+
+    bool reached_top_jump = false;
+
+    [Header("Gravity")]
+    public float max_gravity;
+    public float accel_gravity;
+    public float gravity;
 
     //Player stats
     [Header("Stats")]
@@ -38,15 +53,23 @@ public class player_movement : MonoBehaviour
 
     Rigidbody rb;
 
+    
+    //Attack
+    [Header("Attack")]
+    public GameObject bullet;
+    public GameObject attack_box;
+    public int weapon_id = 1;
+    
+    bool attacking = false;
+    
     //Camera related
     [Header("Camera")]
     public Camera cam;
     public float mouseSensitivity = 2f;
     float cameraVerticalRotation = 0f;
 
-    //Attack related
-    [Header("Attack")]
-    bool attacking = false;
+    
+    
     
 
 
@@ -76,13 +99,45 @@ public class player_movement : MonoBehaviour
         transform.Rotate(Vector3.up * inputX);
     }
 
+    void end_jump_float()
+    {
+        if (can_wall_jump & wall_detecter.on_wall)
+        {
+            jump();
+            can_wall_jump = false;
+        }
+        reached_top_jump = false;
+    }
+    
     void end_jump()
     {
         jump_direction = 0;
+        reached_top_jump = true;
+        Invoke("end_jump_float",.05f);
+    }
+
+    void end_jump_buff()
+    {
+        will_jump = false;
+    }
+
+    void end_coyote_time() { 
+        can_coyote_jump = false;
+    }
+
+    void jump(float force_multiplier = 1) {
+        jump_direction = 1f * force_multiplier;
+        Invoke("end_jump", jump_time);
     }
 
     void movement()
     {
+
+        if (!can_wall_jump & !wall_detecter.on_wall & !on_floor)
+        {
+            can_wall_jump = true;
+        }
+
         if (speed > max_speed) {
             speed -= decceleration;
         }
@@ -90,10 +145,25 @@ public class player_movement : MonoBehaviour
         {
             speed = max_speed;
         }
+
+        if (!on_floor & jump_direction == 0 & !reached_top_jump)
+        {
+            gravity += accel_gravity;
+            if (gravity < max_gravity)
+            {
+                gravity = max_gravity;
+            }
+        }
+        else {
+            gravity = 0;
+        }
+
+        //Applies all the movement including jump
         Vector3 move_direction = transform.forward * direction.y + transform.right * direction.x;
-        move_direction = move_direction.normalized;
-        move_direction += new Vector3(0, jump_direction * jump_force, 0);
-        rb.linearVelocity = move_direction * speed * speed_modifiyer;
+        move_direction = move_direction.normalized * speed * speed_modifiyer;
+        move_direction += new Vector3(0, jump_direction * jump_force + gravity, 0);
+        rb.linearVelocity = move_direction;
+        //rb.AddForce(move_direction * speed * speed_modifiyer, ForceMode.Force);
     }
 
     void floor_detection()
@@ -103,9 +173,20 @@ public class player_movement : MonoBehaviour
         if(ray.collider != null)
         {
             on_floor = true;
+            can_coyote_jump = true;
+            if (will_jump)
+            {
+                jump();
+                will_jump = false;
+                CancelInvoke("end_jump_buffer");
+            }
         }
         else {
             on_floor = false;
+            if (!IsInvoking("end_coyote_time") & can_coyote_jump)
+            {
+                Invoke("end_coyote_time", coyote_time);
+            }
         }
     }
 
@@ -113,6 +194,25 @@ public class player_movement : MonoBehaviour
     {
         damage_script.damage = base_damage;
         hp_script.max_hp = max_health;
+    }
+
+    void melee_attack()
+    {
+        attacking = true;
+        attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
+        attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+        GetComponent<Animator>().SetBool("attack", attacking);
+        Invoke("end_attack", .5f);
+    }
+
+    void ranged_attack() {
+        GameObject b = Instantiate(bullet);
+
+        b.GetComponent<bullet>().source = "player";
+        b.transform.position = cam.transform.position + cam.transform.forward;
+        b.GetComponent<bullet>().direction = cam.transform.forward;
+        b.GetComponent<bullet>().speed = 50;
+        b.GetComponent<damage_system>().source = "player";
     }
 
 
@@ -145,13 +245,34 @@ public class player_movement : MonoBehaviour
     {
         if (on_floor & context.performed)
         {
-            jump_direction = 1;
-            Invoke("end_jump", jump_time);
+            jump();
+            can_wall_jump = true;
+            can_coyote_jump = false;
         }
-        else
+        else if (context.performed & can_coyote_jump)
+        {
+            jump();
+            can_coyote_jump = false;
+            CancelInvoke("end_coyote_time");
+        }
+        else if (context.performed)
+        {
+            will_jump = true;
+            Invoke("end_jump_buffer",jump_buffer);
+        }
+        else if(context.canceled) 
         {
             jump_direction = 0;
+            CancelInvoke("end_jump");
+            reached_top_jump = true;
+            Invoke("end_jump_float", .05f);
         }
+
+        if (!on_floor & context.performed & can_wall_jump & wall_detecter.on_wall) { 
+            jump();
+            can_wall_jump = false;
+        }
+
     }
 
     public void on_attack_input(InputAction.CallbackContext context)
@@ -160,9 +281,14 @@ public class player_movement : MonoBehaviour
         {
             if (!attacking & context.performed)
             {
-                attacking = true;
-                GetComponent<Animator>().SetBool("attack", attacking);
-                Invoke("end_attack", .5f);
+                if (weapon_id == 1)
+                {
+                    melee_attack();
+                }
+                if (weapon_id == 2)
+                {
+                    ranged_attack();
+                }
             }
         }
     }
