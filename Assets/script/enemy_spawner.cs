@@ -9,7 +9,9 @@ public class enemy_spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Instantiate(enemies[enemy_top_spawn],transform);
+        GameObject e = Instantiate(enemies[enemy_top_spawn]);
+        e.transform.position = transform.position;
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

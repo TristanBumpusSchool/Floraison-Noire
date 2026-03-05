@@ -39,7 +39,7 @@ Transform:
   - {fileID: 8703679225985507053}
   - {fileID: 1778522131058823742}
   - {fileID: 8819894542236524254}
-  - {fileID: 3655869739147805702}
+  - {fileID: 3573950589305556915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8637578929583312355
@@ -52,7 +52,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 1
-  m_AngularDamping: 1
+  m_AngularDamping: 1000
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -66,9 +66,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6215560188972187783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,20 +82,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   speed: 0
-  max_speed: 10
-  decceleration: 10
+  max_speed: 20
+  decceleration: 20
   speed_modifiyer: 1
-  dash_speed: 50
-  jump_force: 1.5
+  dash_speed: 100
+  jump_force: 30
   jump_time: 0.2
+  jump_buffer: 0.1
+  coyote_time: 0.1
   on_floor: 0
+  can_coyote_jump: 0
   wall_detecter: {fileID: 62899637570711779}
+  max_gravity: -30
+  accel_gravity: -1
+  gravity: 0
   max_health: 100
   hp_script: {fileID: 3516060842015321950}
   base_damage: 1
   damage_script: {fileID: 7910000954636903962}
   max_stamina: 100
   reacharge_speed: 1
+  bullet: {fileID: 3823653727376500964, guid: 64214a27e530646448344fc2fb128d6b, type: 3}
+  attack_box: {fileID: 2039280569989015023}
+  weapon_id: 2
   cam: {fileID: 8143097061974944728}
   mouseSensitivity: 2
 --- !u!114 &6210580700931147610
@@ -206,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::hp_system
   max_hp: 100
   current_hp: 0
-  hp_ui: {fileID: 0}
+  hp_ui: {fileID: 4430881908196476366}
 --- !u!136 &8415818152791209940
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -214,7 +223,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516972739327946045}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 85052c4308b5d97448cbbc8693945c33, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -418,8 +427,8 @@ Transform:
   m_GameObject: {fileID: 2039280569989015023}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.81}
-  m_LocalScale: {x: 2, y: 0.45, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 1.8}
+  m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 366251947797196160}
@@ -514,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage_system
   damage: 1
+  source: none
 --- !u!1 &2903701381969472554
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +665,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.7
   m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -672,7 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::wall_detection
   on_wall: 0
---- !u!1001 &6995773859639797920
+  collision_point: {x: 0, y: 0, z: 0}
+--- !u!1001 &7075296074135593749
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -680,6 +691,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 366251947797196160}
     m_Modifications:
+    - target: {fileID: 1601699267673943408, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: damage_text
+      value: 
+      objectReference: {fileID: 7170297433490708954}
+    - target: {fileID: 1601699267673943408, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: health_text
+      value: 
+      objectReference: {fileID: 6191681991352180597}
+    - target: {fileID: 1601699267673943408, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: player_script
+      value: 
+      objectReference: {fileID: 6215560188972187783}
+    - target: {fileID: 4025591060216134752, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025591060216134752, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6028553444951485606, guid: b7b90e95788632140abffa8929d167e5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -764,13 +795,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6867188799778121435, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b90e95788632140abffa8929d167e5, type: 3}
---- !u!224 &3655869739147805702 stripped
+--- !u!224 &3573950589305556915 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6028553444951485606, guid: b7b90e95788632140abffa8929d167e5, type: 3}
-  m_PrefabInstance: {fileID: 6995773859639797920}
+  m_PrefabInstance: {fileID: 7075296074135593749}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4430881908196476366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6867188799778121435, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+  m_PrefabInstance: {fileID: 7075296074135593749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6191681991352180597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4025591060216134752, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+  m_PrefabInstance: {fileID: 7075296074135593749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &7170297433490708954 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 122305053608032975, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+  m_PrefabInstance: {fileID: 7075296074135593749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
