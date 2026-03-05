@@ -26,7 +26,7 @@ public class hp_system : MonoBehaviour
         }
 
         if (hp_ui != null) { 
-            hp_ui.GetComponent<TextMeshProUGUI>().text = "PV:" + current_hp.ToString();
+            hp_ui.GetComponent<TextMeshProUGUI>().text = "PV:" + current_hp.ToString() + "/" + max_hp.ToString();
         }
 
     }

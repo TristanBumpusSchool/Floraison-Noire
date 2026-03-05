@@ -1,0 +1,43 @@
+using TMPro;
+using UnityEngine;
+
+public class stats_screen : MonoBehaviour
+{
+
+    public player_movement player_script;
+    public TextMeshProUGUI damage_text;
+    public TextMeshProUGUI health_text;
+
+    bool is_open = false;
+    Vector3 start_pos;
+
+    //public TextMeshProUGUI ;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        start_pos = transform.position;
+        transform.position = new Vector3(0, 10000, 0);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        damage_text.text = "Degas: " + player_script.base_damage.ToString();
+        health_text.text = "Max Vie: " + player_script.max_health.ToString();
+
+        if (Input.GetKeyUp(KeyCode.Tab) & !settings.open_settings & !is_open)
+        {
+            general_manager.pausible_menu_open += 1;
+            transform.position = start_pos;
+            is_open = true;
+
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab) & is_open & !settings.open_settings)
+        {
+            general_manager.pausible_menu_open -= 1;
+            transform.position = new Vector3(0, 10000, 0);
+            is_open = false;
+        }
+    }
+}

@@ -7,6 +7,7 @@ TagManager:
   - player
   - enemy
   - wall
+  - loot_table_manager
   layers:
   - Default
   - TransparentFX
