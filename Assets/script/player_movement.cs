@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,7 @@ public class player_movement : MonoBehaviour
     public float decceleration = 1;
     public float speed_modifiyer = 1;
     public float dash_speed = 100;
+    public float dash_cost = 25;
     Vector2 direction;
 
     [Header("Jump")]
@@ -25,7 +27,7 @@ public class player_movement : MonoBehaviour
     public float coyote_time = .1f;
 
     public bool on_floor = false;
-    bool will_jump = false;
+    public bool will_jump = false;
     public bool can_coyote_jump = false;
 
     public wall_detection wall_detecter;
@@ -48,6 +50,9 @@ public class player_movement : MonoBehaviour
     public float base_damage = 1;
     public damage_system damage_script;
     public float max_stamina = 100;
+    public float stamina = 100;
+    public float stamina_regen = 1;
+    public TextMeshProUGUI stamina_ui;
     public float reacharge_speed = 1;
 
 
@@ -59,18 +64,20 @@ public class player_movement : MonoBehaviour
     public GameObject bullet;
     public GameObject attack_box;
     public int weapon_id = 1;
+    public Dictionary<string, int> attack_upgrades = new Dictionary<string, int>();
     
     bool attacking = false;
-    
+
+    [Header("Blocking")]
+    public bool blocking = false;
+    public int block_cost = 10;
+
     //Camera related
     [Header("Camera")]
     public Camera cam;
     public float mouseSensitivity = 2f;
     float cameraVerticalRotation = 0f;
 
-    
-    
-    
 
 
     public void end_attack()
@@ -101,22 +108,22 @@ public class player_movement : MonoBehaviour
 
     void end_jump_float()
     {
-        if (can_wall_jump & wall_detecter.on_wall)
-        {
-            jump();
-            can_wall_jump = false;
-        }
+        //if (can_wall_jump & wall_detecter.on_wall)
+        //{
+        //    jump();
+        //    can_wall_jump = false;
+        //}
         reached_top_jump = false;
     }
     
     void end_jump()
     {
         jump_direction = 0;
-        reached_top_jump = true;
-        Invoke("end_jump_float",.05f);
+        //reached_top_jump = true;
+        //Invoke("end_jump_float",.05f);
     }
 
-    void end_jump_buff()
+    void end_jump_buffer()
     {
         will_jump = false;
     }
@@ -126,17 +133,12 @@ public class player_movement : MonoBehaviour
     }
 
     void jump(float force_multiplier = 1) {
-        jump_direction = 1f * force_multiplier;
+        gravity = 1f * jump_force;
         Invoke("end_jump", jump_time);
     }
 
     void movement()
     {
-
-        if (!can_wall_jump & !wall_detecter.on_wall & !on_floor)
-        {
-            can_wall_jump = true;
-        }
 
         if (speed > max_speed) {
             speed -= decceleration;
@@ -154,14 +156,19 @@ public class player_movement : MonoBehaviour
                 gravity = max_gravity;
             }
         }
-        else {
-            gravity = 0;
+        //else {
+        //    gravity = 0;
+        //}
+
+        if (stamina <= 0) { 
+            speed_modifiyer = 1;
+            stamina = 0;
         }
 
         //Applies all the movement including jump
         Vector3 move_direction = transform.forward * direction.y + transform.right * direction.x;
         move_direction = move_direction.normalized * speed * speed_modifiyer;
-        move_direction += new Vector3(0, jump_direction * jump_force + gravity, 0);
+        move_direction += new Vector3(0, gravity, 0);
         rb.linearVelocity = move_direction;
         //rb.AddForce(move_direction * speed * speed_modifiyer, ForceMode.Force);
     }
@@ -194,6 +201,7 @@ public class player_movement : MonoBehaviour
     {
         damage_script.damage = base_damage;
         hp_script.max_hp = max_health;
+        stamina_ui.text = stamina.ToString();
     }
 
     void melee_attack()
@@ -213,6 +221,33 @@ public class player_movement : MonoBehaviour
         b.GetComponent<bullet>().direction = cam.transform.forward;
         b.GetComponent<bullet>().speed = 50;
         b.GetComponent<damage_system>().source = "player";
+        b.GetComponent<bullet>().bounces = attack_upgrades["bouncing bullet"];
+    }
+
+    void update_stats()
+    {
+        if(speed_modifiyer == 2)
+        {
+            stamina -= 1;
+        }
+        else if(stamina < max_stamina)
+        {
+            stamina += stamina_regen;
+            if(stamina > max_stamina)
+            {
+                stamina = max_stamina;
+            }
+        }
+    }
+
+    void block(bool input)
+    {
+        blocking = input;
+        attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
+        attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+        attack_box.transform.Rotate(0, 0, -45);
+        print(input);
+        GetComponent<Animator>().SetBool("blocking", blocking);
     }
 
 
@@ -221,6 +256,11 @@ public class player_movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        attack_upgrades.Add("bouncing bullet", 1);
+        Debug.Log(attack_upgrades);
+
+        InvokeRepeating("update_stats", .1f, .1f);
     }
 
     // Update is called once per frame
@@ -234,6 +274,12 @@ public class player_movement : MonoBehaviour
         movement();
 
         camera_movement();
+
+        if (blocking) {
+            attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
+            attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            attack_box.transform.Rotate(0, 0, -45);
+        }
 
     }
 
@@ -268,7 +314,7 @@ public class player_movement : MonoBehaviour
             Invoke("end_jump_float", .05f);
         }
 
-        if (!on_floor & context.performed & can_wall_jump & wall_detecter.on_wall) { 
+        if (!on_floor & context.performed & can_wall_jump & wall_detecter.on_wall & gravity <= 0) { 
             jump();
             can_wall_jump = false;
         }
@@ -298,11 +344,27 @@ public class player_movement : MonoBehaviour
         if (context.performed)
         {
             speed = dash_speed;
+            stamina -= dash_cost;
             speed_modifiyer = 2;
         }
         if (context.canceled)
         {
             speed_modifiyer = 1;
+        }
+    }
+
+    public void on_block_input(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 1)
+        {
+            if (context.performed)
+            {
+                block(true);
+            }
+            if (context.canceled)
+            {
+                block(false);
+            }
         }
     }
 }

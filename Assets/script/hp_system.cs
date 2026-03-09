@@ -8,21 +8,29 @@ public class hp_system : MonoBehaviour
     public float current_hp;
 
     public GameObject hp_ui;
+    GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         current_hp = max_hp;
+        player = GameObject.FindWithTag("player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (current_hp > max_hp) { 
+        if (current_hp > max_hp) {
             current_hp = max_hp;
         }
-        if (current_hp <= 0) { 
-            Destroy(gameObject);
+        if (current_hp <= 0) {
+            if (gameObject.tag == "enemy") {
+                gameObject.transform.SetParent(GameObject.FindWithTag("enemy_manager").transform.GetChild(0).transform, false);
+            }
+            if (gameObject.tag == "player")
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (hp_ui != null) { 

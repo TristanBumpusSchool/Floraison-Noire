@@ -23,7 +23,20 @@ public class damage_system : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<hp_system>() != null & other.tag != source){
-            other.GetComponent<hp_system>().current_hp -= damage;
-        }
+            if (other.tag == "player") {
+                if (!other.GetComponent<player_movement>().blocking & other.GetComponent<player_movement>().stamina > other.GetComponent<player_movement>().block_cost)
+                {
+                    other.GetComponent<hp_system>().current_hp -= damage;
+                }
+                else
+                {
+                    other.GetComponent<player_movement>().stamina -= other.GetComponent<player_movement>().block_cost;
+                }
+            }
+            else
+            {
+                other.GetComponent<hp_system>().current_hp -= damage;
+            }
+            }
     }
 }

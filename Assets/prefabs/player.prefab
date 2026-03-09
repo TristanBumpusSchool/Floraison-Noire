@@ -86,11 +86,13 @@ MonoBehaviour:
   decceleration: 20
   speed_modifiyer: 1
   dash_speed: 100
+  dash_cost: 25
   jump_force: 30
   jump_time: 0.2
   jump_buffer: 0.1
   coyote_time: 0.1
   on_floor: 0
+  will_jump: 0
   can_coyote_jump: 0
   wall_detecter: {fileID: 62899637570711779}
   max_gravity: -30
@@ -101,10 +103,14 @@ MonoBehaviour:
   base_damage: 1
   damage_script: {fileID: 7910000954636903962}
   max_stamina: 100
+  stamina: 100
+  stamina_regen: 1
+  stamina_ui: {fileID: 4802324676740892972}
   reacharge_speed: 1
   bullet: {fileID: 3823653727376500964, guid: 64214a27e530646448344fc2fb128d6b, type: 3}
   attack_box: {fileID: 2039280569989015023}
   weapon_id: 2
+  blocking: 0
   cam: {fileID: 8143097061974944728}
   mouseSensitivity: 2
 --- !u!114 &6210580700931147610
@@ -196,6 +202,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0b68589d-5187-4865-930a-85ab6773d4f3
     m_ActionName: 'player/dash_sprint[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6215560188972187783}
+        m_TargetAssemblyTypeName: player_movement, Assembly-CSharp
+        m_MethodName: on_block_input
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d7b7060f-c940-4c5e-9fe7-adf826d98381
+    m_ActionName: 'player/block[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: player
@@ -417,7 +439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8703679225985507053
 Transform:
   m_ObjectHideFlags: 0
@@ -488,6 +510,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3801916518132936846
 BoxCollider:
@@ -612,6 +635,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6633443662995620313
 GameObject:
@@ -799,6 +823,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7928422539785120372, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -814,6 +842,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6867188799778121435, guid: b7b90e95788632140abffa8929d167e5, type: 3}
   m_PrefabInstance: {fileID: 7075296074135593749}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4802324676740892972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2348003316554443321, guid: b7b90e95788632140abffa8929d167e5, type: 3}
+  m_PrefabInstance: {fileID: 7075296074135593749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &6191681991352180597 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4025591060216134752, guid: b7b90e95788632140abffa8929d167e5, type: 3}

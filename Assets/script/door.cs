@@ -28,8 +28,10 @@ public class door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemies_spawners_to_activate.SetActive(true);
-
+        if (other.tag == "player")
+        {
+            enemies_spawners_to_activate.SetActive(true);
+        }
     }
 
 }

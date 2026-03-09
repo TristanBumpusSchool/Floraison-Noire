@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "block",
+                    "type": "Button",
+                    "id": "d7b7060f-c940-4c5e-9fe7-adf826d98381",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -162,6 +171,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "dash_sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e89507f8-d918-4e8e-bc18-783a716a4b9b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95a079e5-bd35-478a-b9ab-92621d3aa120",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

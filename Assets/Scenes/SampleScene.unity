@@ -207,6 +207,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &36133953
 MeshFilter:
@@ -339,6 +340,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &173422856
 MeshFilter:
@@ -446,14 +448,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -790,6 +792,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &669206984
 MeshFilter:
@@ -916,6 +919,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &672568106
 MeshFilter:
@@ -1320,6 +1324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 2039280569989015023, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3516060842015321950, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: hp_ui
       value: 
@@ -1330,7 +1338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: weapon_id
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: dash_speed
@@ -1338,7 +1346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: jump_buffer
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: max_gravity
@@ -1351,6 +1359,10 @@ PrefabInstance:
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: decceleration
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: mouseSensitivity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8415818152791209940, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: m_Material
@@ -1473,6 +1485,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1259509955
 MeshFilter:
@@ -1671,6 +1684,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &2053523726
 MeshFilter:

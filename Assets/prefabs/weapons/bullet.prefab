@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 854772461023207934}
   - component: {fileID: 1280323456675071650}
   - component: {fileID: 6434155330222951330}
+  - component: {fileID: 8547410907678882291}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Untagged
@@ -51,6 +52,8 @@ MonoBehaviour:
   speed: 0
   direction: {x: 0, y: 0, z: 0}
   source: 
+  bounces: 0
+  homing: 0
 --- !u!114 &854772461023207934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage_system
   damage: 1
+  source: none
 --- !u!54 &1280323456675071650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -98,6 +102,29 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823653727376500964}
+  m_Material: {fileID: 13400000, guid: 85052c4308b5d97448cbbc8693945c33, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 1.03
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &8547410907678882291
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823653727376500964}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,8 +137,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
-  m_Height: 1.03
+  m_Radius: 0.7
+  m_Height: 1.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7617512776802889509
@@ -202,4 +229,5 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}

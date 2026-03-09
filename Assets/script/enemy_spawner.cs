@@ -9,7 +9,8 @@ public class enemy_spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject e = Instantiate(enemies[enemy_top_spawn]);
+        GameObject e = GameObject.FindWithTag("enemy_manager").GetComponent<enemy_manager>().random_enemy();
+        e.transform.SetParent(null);
         e.transform.position = transform.position;
         Destroy(gameObject);
     }
