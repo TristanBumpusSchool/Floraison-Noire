@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
   upgrade_name: Upgrade de Degas
   upgrade_effect: 5
-  upgrade_effect_id: 2
+  upgrade_effect_id: damage
   upgrade_desc: Augment tes Degas par 5

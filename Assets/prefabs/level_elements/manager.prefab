@@ -181,8 +181,17 @@ MonoBehaviour:
   - {fileID: 6280395253184639566, guid: d3fcace5c8bb3c14cb928a6d20742abb, type: 3}
   - {fileID: 6280395253184639566, guid: 9e23bb6715fecc048b80c2a613ab2753, type: 3}
   - {fileID: 6280395253184639566, guid: 368ff75816f8ddc4a91a43aaaf949ec8, type: 3}
-  upgrades_rare: []
-  upgrades_legendary: []
+  - {fileID: 6280395253184639566, guid: 74e43c65f3fdde740875afaf9202be01, type: 3}
+  - {fileID: 6280395253184639566, guid: b70d798e49d748343b0adfc28c18b372, type: 3}
+  upgrades_rare:
+  - {fileID: 6280395253184639566, guid: 1533b7d3c77d7db4faccecf1b10fc0dc, type: 3}
+  - {fileID: 6280395253184639566, guid: 12d77dd625d19c746b74e97b2c7f9a88, type: 3}
+  - {fileID: 6280395253184639566, guid: 0a36072f11df3a54ea5bba83d5598585, type: 3}
+  - {fileID: 6280395253184639566, guid: d40bc74f6c93f5e439174d14cf9d09c8, type: 3}
+  - {fileID: 6280395253184639566, guid: b70d798e49d748343b0adfc28c18b372, type: 3}
+  - {fileID: 6280395253184639566, guid: 6fdc7eebae8297f4095bd2567d19da69, type: 3}
+  upgrades_legendary:
+  - {fileID: 6280395253184639566, guid: 1ab9fc728ca77454c92f248c00ceee04, type: 3}
 --- !u!1001 &121707853147543593
 PrefabInstance:
   m_ObjectHideFlags: 0

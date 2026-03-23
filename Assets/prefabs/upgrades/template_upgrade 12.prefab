@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5682800687144096560}
   - component: {fileID: 7535516972342526915}
   m_Layer: 0
-  m_Name: template_upgrade
+  m_Name: template_upgrade 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

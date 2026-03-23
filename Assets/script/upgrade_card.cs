@@ -32,15 +32,43 @@ public class upgrade_card : MonoBehaviour
 
     public void upgrade()
     {
+        print("S");
+        string upgrade_effect_id = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id;
+        int upgrade_effect = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
 
-        if(upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id == 1)
+        if (upgrade_effect_id == "hp")
         {
-            player.GetComponent<player_movement>().max_health += upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
+            player.GetComponent<player_movement>().max_health += upgrade_effect;
         }
-        if (upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id == 2)
+        if (upgrade_effect_id == "damage")
         {
-            player.GetComponent<player_movement>().base_damage += upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
+            player.GetComponent<player_movement>().base_damage += upgrade_effect;
         }
+        if (upgrade_effect_id == "stamima")
+        {
+            player.GetComponent<player_movement>().max_stamina += upgrade_effect;
+        }
+        if (upgrade_effect_id == "stamina_regen")
+        {
+            player.GetComponent<player_movement>().stamina_regen += upgrade_effect;
+        }
+        if (upgrade_effect_id == "bounce")
+        {
+            player.GetComponent<player_movement>().bullet_bounce += upgrade_effect;
+        }
+        if (upgrade_effect_id == "homing")
+        {
+            player.GetComponent<player_movement>().bullet_homing += upgrade_effect;
+        }
+        if (upgrade_effect_id == "projectil_on_melee")
+        {
+            player.GetComponent<player_movement>().bullet_on_melee += upgrade_effect;
+        }
+        if(upgrade_effect_id == "dash_cost")
+        {
+            player.GetComponent<player_movement>().dash_cost -= upgrade_effect;
+        }
+        if (upgrade_effect_id == "relaod") { }
 
         Destroy(parent);
         general_manager.pausible_menu_open -= 1;

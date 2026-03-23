@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class stats_screen : MonoBehaviour
 {
@@ -25,19 +26,26 @@ public class stats_screen : MonoBehaviour
     {
         damage_text.text = "Degas: " + player_script.base_damage.ToString();
         health_text.text = "Max Vie: " + player_script.max_health.ToString();
+    }
 
-        if (Input.GetKeyUp(KeyCode.Tab) & !settings.open_settings & !is_open)
+    public void on_inv_input(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            general_manager.pausible_menu_open += 1;
-            transform.position = start_pos;
-            is_open = true;
+            if (!settings.open_settings & !is_open)
+            {
+                general_manager.pausible_menu_open += 1;
+                transform.position = start_pos;
+                is_open = true;
 
-        }
-        else if (Input.GetKeyUp(KeyCode.Tab) & is_open & !settings.open_settings)
-        {
-            general_manager.pausible_menu_open -= 1;
-            transform.position = new Vector3(0, 10000, 0);
-            is_open = false;
+            }
+            else if (is_open & !settings.open_settings)
+            {
+                general_manager.pausible_menu_open -= 1;
+                transform.position = new Vector3(0, 10000, 0);
+                is_open = false;
+            }
         }
     }
+
 }

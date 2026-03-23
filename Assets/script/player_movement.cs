@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Lumi;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -56,7 +58,7 @@ public class player_movement : MonoBehaviour
     public float reacharge_speed = 1;
 
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     
     //Attack
@@ -65,7 +67,18 @@ public class player_movement : MonoBehaviour
     public GameObject attack_box;
     public int weapon_id = 1;
     public Dictionary<string, int> attack_upgrades = new Dictionary<string, int>();
-    
+
+    [Header("Bullet Stats")]
+    public TextMeshProUGUI ammo_ui;
+
+    public float reload_speed = 1f;
+    public float ammo_max = 5;
+    public float ammo_current = 5;
+    public float bullet_cost = 1;
+    public int bullet_bounce = 0;
+    public int bullet_homing = 0;
+    public int bullet_on_melee = 0;
+
     bool attacking = false;
 
     [Header("Blocking")]
@@ -75,8 +88,12 @@ public class player_movement : MonoBehaviour
     //Camera related
     [Header("Camera")]
     public Camera cam;
-    public float mouseSensitivity = 2f;
+    public float mouse_sensitivity = 2f;
     float cameraVerticalRotation = 0f;
+    Vector2 camera_input = Vector2.zero;
+
+    [Header("Light")]
+    public LightDetector light_detector;
 
 
 
@@ -91,19 +108,16 @@ public class player_movement : MonoBehaviour
 
         //Camera movement from this tutorial (03/02) : https://www.youtube.com/watch?v=5Rq8A4H6Nzw
 
-        float inputX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float inputY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
         // Rotate the Camera around its local X axis
 
-        cameraVerticalRotation -= inputY;
+        cameraVerticalRotation -= camera_input.y;
         cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 80f);
         cam.transform.localEulerAngles = Vector3.right * cameraVerticalRotation;
 
 
         // Rotate the Player Object and the Camera around its Y axis
 
-        transform.Rotate(Vector3.up * inputX);
+        transform.Rotate(Vector3.up * camera_input.x);
     }
 
     void end_jump_float()
@@ -202,6 +216,7 @@ public class player_movement : MonoBehaviour
         damage_script.damage = base_damage;
         hp_script.max_hp = max_health;
         stamina_ui.text = stamina.ToString();
+        ammo_ui.text = "Ammo: " + ammo_current.ToString();
     }
 
     void melee_attack()
@@ -211,20 +226,28 @@ public class player_movement : MonoBehaviour
         attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
         GetComponent<Animator>().SetBool("attack", attacking);
         Invoke("end_attack", .5f);
+        if(bullet_on_melee > 0)
+        {
+            ranged_attack();
+        }
     }
 
     void ranged_attack() {
-        GameObject b = Instantiate(bullet);
+        if (ammo_current >= bullet_cost)
+        {
+            ammo_current -= bullet_cost;
+            GameObject b = Instantiate(bullet);
 
-        b.GetComponent<bullet>().source = "player";
-        b.transform.position = cam.transform.position + cam.transform.forward;
-        b.GetComponent<bullet>().direction = cam.transform.forward;
-        b.GetComponent<bullet>().speed = 50;
-        b.GetComponent<damage_system>().source = "player";
-        b.GetComponent<bullet>().bounces = attack_upgrades["bouncing bullet"];
+            b.GetComponent<bullet>().source = "player";
+            b.transform.position = cam.transform.position + cam.transform.forward;
+            b.GetComponent<bullet>().direction = cam.transform.forward;
+            b.GetComponent<bullet>().speed = 50;
+            b.GetComponent<damage_system>().source = "player";
+            b.GetComponent<bullet>().bounces = attack_upgrades["bouncing bullet"];
+        }
     }
 
-    void update_stats()
+    void update_stamina()
     {
         if(speed_modifiyer == 2)
         {
@@ -250,17 +273,34 @@ public class player_movement : MonoBehaviour
         GetComponent<Animator>().SetBool("blocking", blocking);
     }
 
+    void ammo_reload()
+    {
+        print(light_detector.SampledLightAmount);
+        if(light_detector.SampledLightAmount > .75)
+        {
+            ammo_current += reload_speed;
+            if(ammo_current > ammo_max)
+            {
+                ammo_current = ammo_max;
+            }
+        }
+    }
+
 
 
     void Start()
     {
+        Light[] lights = GameObject.FindGameObjectWithTag("lights").GetComponentsInChildren<Light>();
+        light_detector.lights = lights.ToList();
+
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
         attack_upgrades.Add("bouncing bullet", 1);
         Debug.Log(attack_upgrades);
 
-        InvokeRepeating("update_stats", .1f, .1f);
+        InvokeRepeating("update_stamina", .1f, .1f);
+        InvokeRepeating("ammo_reload", 1f, 1f);
     }
 
     // Update is called once per frame
@@ -366,5 +406,22 @@ public class player_movement : MonoBehaviour
                 block(false);
             }
         }
+    }
+
+    public void on_switch_input(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            weapon_id += 1;
+            if (weapon_id >= 3)
+            {
+                weapon_id = 1;
+            }
+        }
+    }
+
+    public void on_camera_input(InputAction.CallbackContext context)
+    {
+        camera_input = context.ReadValue<Vector2>() * mouse_sensitivity;
     }
 }

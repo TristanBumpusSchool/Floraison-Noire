@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
   upgrade_name: Upgrade de Stamina
   upgrade_effect: 5
-  upgrade_effect_id: 3
+  upgrade_effect_id: stamina
   upgrade_desc: Augment ton Stamina par 5

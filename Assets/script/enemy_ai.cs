@@ -1,3 +1,4 @@
+using Lumi;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,6 +24,8 @@ public class enemy_ai : MonoBehaviour
     public float attack_range = 2;
     public float follow_range = 10;
 
+    [Header("Lights")]
+    public LightDetector light_detector;
 
     /// <summary>
     /// Switchs between the diffrent stats of the enemy
@@ -51,15 +54,29 @@ public class enemy_ai : MonoBehaviour
         print(transform.position);
     }
 
+    private void OnDisable()
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         //GetComponent<NavMeshAgent>().enabled = true;
-        if (current_state == 2)
+        if (current_state == 2 & !GetComponent<Animator>().GetBool("attack"))
         {
-            GetComponent<NavMeshAgent>().destination = player.transform.position;
-            GetComponent<NavMeshAgent>().speed = speed;
-            transform.LookAt(player.transform.position);
+            if (light_detector.SampledLightAmount > .75f) 
+            { 
+                GetComponent<NavMeshAgent>().destination = player.transform.position;
+                GetComponent<NavMeshAgent>().speed = speed;
+                transform.LookAt(player.transform.position); 
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().destination = player.transform.position;
+                GetComponent<NavMeshAgent>().speed = speed/2;
+                transform.LookAt(player.transform.position);
+            }
         }
         else
         {
