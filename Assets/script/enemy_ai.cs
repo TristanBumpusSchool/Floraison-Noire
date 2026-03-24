@@ -22,7 +22,7 @@ public class enemy_ai : MonoBehaviour
 
     [Header("Range")]
     public float attack_range = 2;
-    public float follow_range = 10;
+    public float follow_range = 100;
 
     [Header("Lights")]
     public LightDetector light_detector;
@@ -34,7 +34,13 @@ public class enemy_ai : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
-            current_state = 3;
+            RaycastHit ray;
+            Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            if (ray.collider.tag == "player")
+            {
+                current_state = 3;
+            }
+            
         }
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {

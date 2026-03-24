@@ -66,7 +66,6 @@ public class player_movement : MonoBehaviour
     public GameObject bullet;
     public GameObject attack_box;
     public int weapon_id = 1;
-    public Dictionary<string, int> attack_upgrades = new Dictionary<string, int>();
 
     [Header("Bullet Stats")]
     public TextMeshProUGUI ammo_ui;
@@ -243,7 +242,8 @@ public class player_movement : MonoBehaviour
             b.GetComponent<bullet>().direction = cam.transform.forward;
             b.GetComponent<bullet>().speed = 50;
             b.GetComponent<damage_system>().source = "player";
-            b.GetComponent<bullet>().bounces = attack_upgrades["bouncing bullet"];
+            b.GetComponent<bullet>().homing = bullet_homing;
+            b.GetComponent<bullet>().bounces = bullet_bounce;
         }
     }
 
@@ -295,9 +295,6 @@ public class player_movement : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-
-        attack_upgrades.Add("bouncing bullet", 1);
-        Debug.Log(attack_upgrades);
 
         InvokeRepeating("update_stamina", .1f, .1f);
         InvokeRepeating("ammo_reload", 1f, 1f);

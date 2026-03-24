@@ -1349,6 +1349,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: blocking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: max_speed
       value: 20
       objectReference: {fileID: 0}
@@ -1373,8 +1377,16 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: bullet_homing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: decceleration
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: bullet_on_melee
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6215560188972187783, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: mouseSensitivity
