@@ -34,7 +34,7 @@ public class upgrade_card : MonoBehaviour
     {
         print("S");
         string upgrade_effect_id = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id;
-        int upgrade_effect = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
+        float upgrade_effect = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
 
         if (upgrade_effect_id == "hp")
         {
@@ -54,21 +54,23 @@ public class upgrade_card : MonoBehaviour
         }
         if (upgrade_effect_id == "bounce")
         {
-            player.GetComponent<player_movement>().bullet_bounce += upgrade_effect;
+            player.GetComponent<player_movement>().bullet_bounce += ((int)upgrade_effect);
         }
         if (upgrade_effect_id == "homing")
         {
-            player.GetComponent<player_movement>().bullet_homing += upgrade_effect;
+            player.GetComponent<player_movement>().bullet_homing += ((int)upgrade_effect);
         }
         if (upgrade_effect_id == "projectil_on_melee")
         {
-            player.GetComponent<player_movement>().bullet_on_melee += upgrade_effect;
+            player.GetComponent<player_movement>().bullet_on_melee += ((int)upgrade_effect);
         }
         if(upgrade_effect_id == "dash_cost")
         {
             player.GetComponent<player_movement>().dash_cost -= upgrade_effect;
         }
-        if (upgrade_effect_id == "relaod") { }
+        if (upgrade_effect_id == "relaod") { 
+            player.GetComponent<player_movement>().reload_speed -= upgrade_effect;
+        }
 
         Destroy(parent);
         general_manager.pausible_menu_open -= 1;

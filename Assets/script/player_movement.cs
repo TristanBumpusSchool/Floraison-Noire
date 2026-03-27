@@ -55,7 +55,6 @@ public class player_movement : MonoBehaviour
     public float stamina = 100;
     public float stamina_regen = 1;
     public TextMeshProUGUI stamina_ui;
-    public float reacharge_speed = 1;
 
 
     public Rigidbody rb;
@@ -70,7 +69,7 @@ public class player_movement : MonoBehaviour
     [Header("Bullet Stats")]
     public TextMeshProUGUI ammo_ui;
 
-    public float reload_speed = 1f;
+    public float reload_speed = 5f;
     public float ammo_max = 5;
     public float ammo_current = 5;
     public float bullet_cost = 1;
@@ -275,7 +274,7 @@ public class player_movement : MonoBehaviour
 
     void ammo_reload()
     {
-        print(light_detector.SampledLightAmount);
+        //print(light_detector.SampledLightAmount);
         if(light_detector.SampledLightAmount > .75)
         {
             ammo_current += reload_speed;
@@ -284,6 +283,7 @@ public class player_movement : MonoBehaviour
                 ammo_current = ammo_max;
             }
         }
+        Invoke("ammo_reload", reload_speed);
     }
 
 
@@ -297,7 +297,7 @@ public class player_movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         InvokeRepeating("update_stamina", .1f, .1f);
-        InvokeRepeating("ammo_reload", 1f, 1f);
+        Invoke("ammo_reload", reload_speed);
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ public class upgrades_items : MonoBehaviour
 {
 
     public string upgrade_name;
-    public int upgrade_effect;
+    public float upgrade_effect;
     public string upgrade_effect_id;
     public string upgrade_desc;
 

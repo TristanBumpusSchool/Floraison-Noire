@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
   upgrade_name: Upgrade de prix du Dash
-  upgrade_effect: 2
+  upgrade_effect: 5
   upgrade_effect_id: dash_cost
   upgrade_desc: Deminu le prix du dash
