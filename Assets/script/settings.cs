@@ -36,16 +36,19 @@ public class settings : MonoBehaviour
         if (contex.performed)
         {
             if (!open_settings)
-            {
+            { 
+                transform.GetChild(0).gameObject.SetActive(true);
                 open_settings = true;
                 transform.position = start_pos;
                 general_manager.pausible_menu_open += 1;
+               
             }
             else if (open_settings)
             {
                 open_settings = false;
                 transform.position = new Vector3(0, 10000, 0);
                 general_manager.pausible_menu_open -= 1;
+                transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
