@@ -8,6 +8,7 @@ public class hp_system : MonoBehaviour
     public float current_hp;
 
     public GameObject hp_ui;
+    public AudioClip sound_to_play_on_hit;
     GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

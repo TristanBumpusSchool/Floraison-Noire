@@ -66,6 +66,7 @@ public class player_movement : MonoBehaviour
     public GameObject bullet;
     public GameObject attack_box;
     public int weapon_id = 1;
+    public bool attacking = false;
 
     [Header("Bullet Stats")]
     public TextMeshProUGUI ammo_ui;
@@ -78,11 +79,13 @@ public class player_movement : MonoBehaviour
     public int bullet_homing = 0;
     public int bullet_on_melee = 0;
 
-    bool attacking = false;
+    
 
     [Header("Blocking")]
     public bool blocking = false;
     public int block_cost = 10;
+    public bool can_parry = false;
+    public float parry_time = 0.1f;
 
     //Camera related
     [Header("Camera")]
@@ -94,12 +97,17 @@ public class player_movement : MonoBehaviour
     [Header("Light")]
     public LightDetector light_detector;
 
+    [Header("Animations")]
+    public List<AnimationClip> animations;
+
+    public Animator anim;
+    AnimatorStateInfo state_info;
+
 
 
     public void end_attack()
     {
         attacking = false;
-        GetComponent<Animator>().SetBool("attack",attacking);
     }
 
     void camera_movement()
@@ -223,7 +231,6 @@ public class player_movement : MonoBehaviour
         attacking = true;
         attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
         attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
-        GetComponent<Animator>().SetBool("attack", attacking);
         Invoke("end_attack", .5f);
         if(bullet_on_melee > 0)
         {
@@ -269,13 +276,17 @@ public class player_movement : MonoBehaviour
         attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
         attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
         attack_box.transform.Rotate(0, 0, -45);
-        print(input);
-        GetComponent<Animator>().SetBool("blocking", blocking);
+        can_parry = true;
+        Invoke("remove_parry", parry_time);
+    }
+
+    void remove_parry()
+    {
+        can_parry = false;
     }
 
     void ammo_reload()
     {
-        print(light_detector.SampledLightAmount);
         if(light_detector.SampledLightAmount > .75)
         {
             ammo_current += reload_speed;
@@ -286,6 +297,28 @@ public class player_movement : MonoBehaviour
         }
     }
 
+    void update_animations()
+    {
+        if (blocking) {
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("blocking"))
+            {
+                anim.Play(animations[0].name);
+            }
+        }
+        else if (attacking)
+        {
+            if (!state_info.IsName(animations[1].name))
+                { 
+                anim.Play(animations[1].name);
+            }
+        }
+        else
+        {
+            
+            anim.Play(animations[2].name); 
+        }
+    }
+
 
 
     void Start()
@@ -293,7 +326,7 @@ public class player_movement : MonoBehaviour
         Light[] lights = GameObject.FindGameObjectWithTag("lights").GetComponentsInChildren<Light>();
         light_detector.lights = lights.ToList();
 
-        rb = GetComponent<Rigidbody>();
+        state_info = anim.GetCurrentAnimatorStateInfo(0);
         Cursor.lockState = CursorLockMode.Locked;
 
         InvokeRepeating("update_stamina", .1f, .1f);
@@ -312,12 +345,26 @@ public class player_movement : MonoBehaviour
 
         camera_movement();
 
+        update_animations();
+
         if (blocking) {
             attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
             attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
             attack_box.transform.Rotate(0, 0, -45);
         }
 
+    }
+
+
+
+    //Public functions
+
+    public void parry()
+    {
+        if (can_parry) {
+            block(false);
+            melee_attack();
+        }
     }
 
     public void on_move_input(InputAction.CallbackContext context) {
@@ -401,6 +448,8 @@ public class player_movement : MonoBehaviour
             if (context.canceled)
             {
                 block(false);
+                can_parry = false;
+                CancelInvoke("remove_parry");
             }
         }
     }
