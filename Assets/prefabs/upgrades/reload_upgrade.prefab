@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
   upgrade_name: Upgrade de vitesse de recharge
-  upgrade_effect: 5
+  upgrade_effect: 1
   upgrade_effect_id: reload
   upgrade_desc: Diminu le temps de recharche pour temps arme projectile

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class settings : MonoBehaviour
@@ -6,6 +7,7 @@ public class settings : MonoBehaviour
 
     static public bool open_settings = false;
     Vector3 start_pos = Vector3.zero;
+    public GameObject first_button;
 
 
 
@@ -37,8 +39,8 @@ public class settings : MonoBehaviour
         {
             if (!open_settings)
             { 
-                transform.GetChild(0).gameObject.SetActive(true);
                 open_settings = true;
+                GameObject.FindGameObjectWithTag("event_system").GetComponent<EventSystem>().SetSelectedGameObject(first_button);
                 transform.position = start_pos;
                 general_manager.pausible_menu_open += 1;
                
@@ -48,7 +50,10 @@ public class settings : MonoBehaviour
                 open_settings = false;
                 transform.position = new Vector3(0, 10000, 0);
                 general_manager.pausible_menu_open -= 1;
-                transform.GetChild(0).gameObject.SetActive(false);
+                if(general_manager.last_opened_ui != null)
+                {
+                    GameObject.FindGameObjectWithTag("event_system").GetComponent<EventSystem>().SetSelectedGameObject(general_manager.last_opened_ui.GetComponent<UI>().first_button);
+                }
             }
         }
     }

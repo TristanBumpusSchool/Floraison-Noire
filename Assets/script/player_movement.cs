@@ -67,6 +67,8 @@ public class player_movement : MonoBehaviour
     public GameObject attack_box;
     public int weapon_id = 1;
     public bool attacking = false;
+    public GameObject melee_slot;
+    public GameObject range_slot;
 
     [Header("Bullet Stats")]
     public TextMeshProUGUI ammo_ui;
@@ -102,6 +104,9 @@ public class player_movement : MonoBehaviour
 
     public Animator anim;
     AnimatorStateInfo state_info;
+
+    //Interactions
+    GameObject interaction_object;
 
 
 
@@ -220,7 +225,17 @@ public class player_movement : MonoBehaviour
 
     void update_scripts()
     {
-        damage_script.damage = base_damage;
+        int weapon_damage;
+
+        if (weapon_id == 0)
+        {
+            weapon_damage = melee_slot.GetComponentInChildren<weapon_system>().damage;
+        }
+        else
+        {
+            weapon_damage = range_slot.GetComponentInChildren<weapon_system>().damage;
+        }
+        damage_script.damage = base_damage + weapon_damage;
         hp_script.max_hp = max_health;
         stamina_ui.text = stamina.ToString();
         ammo_ui.text = "Ammo: " + ammo_current.ToString();
@@ -289,12 +304,13 @@ public class player_movement : MonoBehaviour
     {
         if(light_detector.SampledLightAmount > .75)
         {
-            ammo_current += reload_speed;
+            ammo_current += 1;
             if(ammo_current > ammo_max)
             {
                 ammo_current = ammo_max;
             }
         }
+        Invoke("ammo_reload", reload_speed);
     }
 
     void update_animations()
@@ -307,15 +323,31 @@ public class player_movement : MonoBehaviour
         }
         else if (attacking)
         {
-            if (!state_info.IsName(animations[1].name))
-                { 
-                anim.Play(animations[1].name);
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name))
+            {
+                print("S");
+                anim.Play(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name);
             }
         }
         else
         {
             
             anim.Play(animations[2].name); 
+        }
+    }
+
+    void check_for_interactions()
+    {
+        RaycastHit ray;
+        Physics.Raycast(cam.transform.position, cam.transform.forward, out ray, 1000);
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * ray.distance, Color.red);
+        interaction_object = null;
+        if (ray.collider != null)
+        {
+            if (ray.collider.GetComponent<interactble>() != null)
+            {
+                interaction_object = ray.collider.gameObject;
+            }
         }
     }
 
@@ -330,12 +362,14 @@ public class player_movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         InvokeRepeating("update_stamina", .1f, .1f);
-        InvokeRepeating("ammo_reload", 1f, 1f);
+        Invoke("ammo_reload", reload_speed);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        check_for_interactions();
 
         update_scripts();
 
@@ -427,9 +461,12 @@ public class player_movement : MonoBehaviour
     {
         if (context.performed)
         {
-            speed = dash_speed;
-            stamina -= dash_cost;
-            speed_modifiyer = 2;
+            if (stamina >= dash_cost)
+            {
+                speed = dash_speed;
+                stamina -= dash_cost;
+                speed_modifiyer = 2;
+            }
         }
         if (context.canceled)
         {
@@ -469,5 +506,16 @@ public class player_movement : MonoBehaviour
     public void on_camera_input(InputAction.CallbackContext context)
     {
         camera_input = context.ReadValue<Vector2>() * mouse_sensitivity;
+    }
+
+    public void on_interaction_input(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(interaction_object != null)
+            {
+                interaction_object.GetComponent<interactble>().activate(gameObject);
+            }
+        }
     }
 }

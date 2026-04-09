@@ -30,6 +30,8 @@ public class upgrade_card : MonoBehaviour
         
     }
 
+
+
     public void upgrade()
     {
         print("S");
@@ -68,7 +70,9 @@ public class upgrade_card : MonoBehaviour
         {
             player.GetComponent<player_movement>().dash_cost -= upgrade_effect;
         }
-        if (upgrade_effect_id == "relaod") { }
+        if (upgrade_effect_id == "relaod") {
+            player.GetComponent<player_movement>().reload_speed -= upgrade_effect;
+        }
 
         Destroy(parent);
         general_manager.pausible_menu_open -= 1;

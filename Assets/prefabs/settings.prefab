@@ -150,10 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 8795577795814835744}
+    m_SelectOnDown: {fileID: 5469890962808030069}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -420,10 +420,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 6815299745599908515}
+    m_SelectOnDown: {fileID: 8795577795814835744}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -541,10 +541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 5469890962808030069}
+    m_SelectOnDown: {fileID: 6815299745599908515}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -602,7 +602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6356416726520451968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -676,6 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120c84ae57f68f74fbe32bd0305da24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::settings
+  first_button: {fileID: 1743397803476249165}
 --- !u!1 &7273523753246515066
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +690,7 @@ GameObject:
   - component: {fileID: 4354228753804739790}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: event_system
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -743,7 +744,7 @@ MonoBehaviour:
   m_ActionsAsset: {fileID: -944628639613478452, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
   m_PointAction: {fileID: -973265754733449341, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
   m_MoveAction: {fileID: -973265754733449341, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
-  m_SubmitAction: {fileID: 994702844468129369, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
+  m_SubmitAction: {fileID: 3413981279043506891, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
   m_CancelAction: {fileID: 0}
   m_LeftClickAction: {fileID: 994702844468129369, guid: 826cbdc2dea1ea040937f9eeab1b481b, type: 3}
   m_MiddleClickAction: {fileID: 0}

@@ -4,8 +4,8 @@ using TMPro;
 
 public class general_manager : MonoBehaviour
 {
-
     static public int pausible_menu_open = 0;
+    static public GameObject last_opened_ui;
 
     void Start()
     {

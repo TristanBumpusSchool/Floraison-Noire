@@ -10,6 +10,10 @@ TagManager:
   - loot_table_manager
   - enemy_manager
   - lights
+  - melee slot
+  - range slot
+  - weapon
+  - event_system
   layers:
   - Default
   - TransparentFX
