@@ -80,6 +80,7 @@ public class player_movement : MonoBehaviour
     public int bullet_bounce = 0;
     public int bullet_homing = 0;
     public int bullet_on_melee = 0;
+    GameObject current_bullet;
 
     
 
@@ -253,7 +254,8 @@ public class player_movement : MonoBehaviour
         }
     }
 
-    void ranged_attack() {
+    void original_range_attack()
+    {
         if (ammo_current >= bullet_cost)
         {
             ammo_current -= bullet_cost;
@@ -266,6 +268,31 @@ public class player_movement : MonoBehaviour
             b.GetComponent<damage_system>().source = "player";
             b.GetComponent<bullet>().homing = bullet_homing;
             b.GetComponent<bullet>().bounces = bullet_bounce;
+        }
+    }
+
+    void ranged_attack() {
+        current_bullet.transform.parent = null;
+        current_bullet.GetComponent<bullet>().speed = 50;
+        current_bullet.GetComponent<bullet>().direction = cam.transform.forward;
+    }
+
+    void start_ranged_attack()
+    {
+        if (ammo_current >= bullet_cost)
+        {
+            ammo_current -= bullet_cost;
+            GameObject b = Instantiate(bullet, range_slot.transform);
+
+            b.transform.localPosition = Vector3.zero;
+            b.GetComponent<bullet>().source = "player";
+            b.transform.position = cam.transform.position + cam.transform.forward;
+            b.GetComponent<bullet>().direction = cam.transform.forward;
+            b.GetComponent<bullet>().speed = 0;
+            b.GetComponent<damage_system>().source = "player";
+            b.GetComponent<bullet>().homing = bullet_homing;
+            b.GetComponent<bullet>().bounces = bullet_bounce;
+            current_bullet = b;
         }
     }
 
@@ -334,6 +361,13 @@ public class player_movement : MonoBehaviour
             
             anim.Play(animations[2].name); 
         }
+    
+        if(weapon_id == 2)
+        {
+            range_slot.transform.position = cam.transform.forward * .5f + cam.transform.position + cam.transform.right * .5f;
+            range_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            //range_slot.transform.Rotate(0, 0, -45);
+        }
     }
 
     void check_for_interactions()
@@ -368,6 +402,8 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        print(light_detector.SampledLightAmount);
 
         check_for_interactions();
 
@@ -443,13 +479,21 @@ public class player_movement : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            if (!attacking & context.performed)
+            if (weapon_id == 1)
             {
-                if (weapon_id == 1)
+                if (!attacking & context.performed)
                 {
                     melee_attack();
                 }
-                if (weapon_id == 2)
+            }
+
+            if (weapon_id == 2)
+            {
+                if (!attacking & context.performed)
+                {
+                    start_ranged_attack();
+                }
+                if (!attacking & context.canceled)
                 {
                     ranged_attack();
                 }
