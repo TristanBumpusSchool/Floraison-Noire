@@ -80,7 +80,6 @@ public class enemy_ai : MonoBehaviour
     {
         GetComponent<NavMeshAgent>().enabled = true;
         player = GameObject.FindWithTag("player");
-        print(transform.position);
     }
 
     private void OnDisable()
@@ -110,7 +109,6 @@ public class enemy_ai : MonoBehaviour
         }
         else if(current_state == 4)
         {
-            print("S");
             GetComponent<NavMeshAgent>().destination = player_last_position;
             GetComponent<NavMeshAgent>().speed = speed;
             transform.LookAt(player_last_position);

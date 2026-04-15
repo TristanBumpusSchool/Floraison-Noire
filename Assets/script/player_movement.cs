@@ -107,7 +107,7 @@ public class player_movement : MonoBehaviour
     AnimatorStateInfo state_info;
 
     //Interactions
-    GameObject interaction_object;
+    public GameObject interaction_object = null;
 
 
 
@@ -357,7 +357,6 @@ public class player_movement : MonoBehaviour
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name))
             {
-                print("S");
                 anim.Play(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name);
             }
         }
@@ -413,7 +412,6 @@ public class player_movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        print(light_detector.SampledLightAmount);
 
         check_for_interactions();
 
@@ -530,7 +528,7 @@ public class player_movement : MonoBehaviour
 
     public void on_block_input(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 1 & current_bullet != null)
+        if (Time.timeScale == 1 & weapon_id == 1)
         {
             if (context.performed)
             {

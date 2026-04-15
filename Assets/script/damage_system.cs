@@ -27,6 +27,9 @@ public class damage_system : MonoBehaviour
                 print("S");
                 if (!other.GetComponent<player_movement>().blocking || other.GetComponent<player_movement>().blocking & other.GetComponent<player_movement>().stamina < other.GetComponent<player_movement>().block_cost)
                 {
+
+                    other.GetComponent<player_movement>().blocking = false;
+
                     other.GetComponent<hp_system>().current_hp -= damage;
                     if(other.GetComponent<hp_system>().sound_to_play_on_hit != null)
                     {

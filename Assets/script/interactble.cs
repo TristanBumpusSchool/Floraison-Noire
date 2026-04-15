@@ -4,17 +4,28 @@ public class interactble : MonoBehaviour
 {
 
     public string type;
+    public GameObject ui;
+
+    GameObject player;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        player = GameObject.FindWithTag("player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (player.GetComponent<player_movement>().interaction_object == gameObject) { 
+            ui.SetActive(true);
+        }
+        else
+        {
+            ui.SetActive(false);
+        }
     }
 
 

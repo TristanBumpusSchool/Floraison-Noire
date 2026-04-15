@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5682800687144096560}
   - component: {fileID: 7535516972342526915}
   m_Layer: 0
-  m_Name: template_upgrade 7
+  m_Name: speed_upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Upgrade de Vie
-  upgrade_effect: 5
-  upgrade_effect_id: 1
-  upgrade_desc: Augmente t'est vie total par 5
+  upgrade_name: Plus vite
+  upgrade_effect: 2
+  upgrade_effect_id: speed
+  upgrade_desc: Augment ta vitess legerment

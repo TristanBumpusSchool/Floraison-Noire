@@ -73,6 +73,10 @@ public class upgrade_card : MonoBehaviour
         if (upgrade_effect_id == "relaod") {
             player.GetComponent<player_movement>().reload_speed -= upgrade_effect;
         }
+        if (upgrade_effect_id == "speed")
+        {
+            player.GetComponent<player_movement>().max_speed += upgrade_effect;
+        }
 
         Destroy(parent);
         general_manager.pausible_menu_open -= 1;

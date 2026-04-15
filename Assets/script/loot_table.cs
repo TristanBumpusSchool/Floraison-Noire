@@ -26,7 +26,7 @@ public class loot_table : MonoBehaviour
         int chance = Random.Range(1, 1);
         if (chance <= commun_chance)
         {
-            int upgrade_id = Random.Range(0, upgrades_commun.Length);
+            int upgrade_id = Random.Range(0, upgrades_commun.Length - 1);
             GameObject final_upgrade = upgrades_commun[upgrade_id];
             return final_upgrade;
     }
