@@ -80,6 +80,9 @@ public class enemy_ai : MonoBehaviour
     {
         GetComponent<NavMeshAgent>().enabled = true;
         player = GameObject.FindWithTag("player");
+
+        GetComponent<hp_system>().max_hp = max_health;
+        GetComponent<hp_system>().current_hp = max_health;
     }
 
     private void OnDisable()

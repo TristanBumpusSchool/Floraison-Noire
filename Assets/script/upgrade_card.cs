@@ -41,14 +41,17 @@ public class upgrade_card : MonoBehaviour
         if (upgrade_effect_id == "hp")
         {
             player.GetComponent<player_movement>().max_health += upgrade_effect;
+            player.GetComponent<hp_system>().max_hp += upgrade_effect;
+            player.GetComponent<hp_system>().current_hp += upgrade_effect;
         }
         if (upgrade_effect_id == "damage")
         {
             player.GetComponent<player_movement>().base_damage += upgrade_effect;
         }
-        if (upgrade_effect_id == "stamima")
+        if (upgrade_effect_id == "stamina")
         {
             player.GetComponent<player_movement>().max_stamina += upgrade_effect;
+            player.GetComponent<player_movement>().stamina += upgrade_effect;
         }
         if (upgrade_effect_id == "stamina_regen")
         {

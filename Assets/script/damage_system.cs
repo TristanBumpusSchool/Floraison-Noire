@@ -22,6 +22,7 @@ public class damage_system : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        print("Collision");
         if (other.GetComponent<hp_system>() != null & other.tag != source){
             if (other.tag == "player") {
                 print("S");
@@ -44,6 +45,7 @@ public class damage_system : MonoBehaviour
             }
             else
             {
+                print("ow");
                 other.GetComponent<hp_system>().current_hp -= damage;
                 if (other.GetComponent<hp_system>().sound_to_play_on_hit != null)
                 {
