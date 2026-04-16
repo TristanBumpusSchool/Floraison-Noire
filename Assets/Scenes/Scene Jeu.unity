@@ -19097,7 +19097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969323509}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: light Manager
   m_TagString: lights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
