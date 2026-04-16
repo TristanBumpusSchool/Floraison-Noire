@@ -107,7 +107,7 @@ public class player_movement : MonoBehaviour
     AnimatorStateInfo state_info;
 
     //Interactions
-    GameObject interaction_object;
+    public GameObject interaction_object = null;
 
 
 
@@ -273,8 +273,12 @@ public class player_movement : MonoBehaviour
 
     void ranged_attack() {
         current_bullet.transform.parent = null;
-        current_bullet.GetComponent<bullet>().speed = 50;
         current_bullet.GetComponent<bullet>().direction = cam.transform.forward;
+        current_bullet.GetComponent<bullet>().enabled = true;
+        current_bullet.transform.position = cam.transform.forward + cam.transform.position;
+        current_bullet.GetComponent<Rigidbody>().isKinematic = false;
+        current_bullet.GetComponent<Collider>().enabled = true;
+        //current_bullet = null;
     }
 
     void start_ranged_attack()
@@ -282,14 +286,15 @@ public class player_movement : MonoBehaviour
         if (ammo_current >= bullet_cost)
         {
             ammo_current -= bullet_cost;
-            GameObject b = Instantiate(bullet, range_slot.transform);
+            GameObject b = Instantiate(bullet);
 
-            b.transform.localPosition = Vector3.zero;
+            b.transform.rotation = range_slot.transform.rotation;
+            b.transform.parent = range_slot.transform;
             b.GetComponent<bullet>().source = "player";
-            b.transform.position = cam.transform.position + cam.transform.forward;
+            b.transform.position = range_slot.transform.position;
             b.GetComponent<bullet>().direction = cam.transform.forward;
-            b.GetComponent<bullet>().speed = 0;
-            b.GetComponent<damage_system>().source = "player";
+            b.GetComponent<bullet>().speed = 50;
+            b.transform.GetComponent<damage_system>().source = "player";
             b.GetComponent<bullet>().homing = bullet_homing;
             b.GetComponent<bullet>().bounces = bullet_bounce;
             current_bullet = b;
@@ -352,7 +357,6 @@ public class player_movement : MonoBehaviour
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name))
             {
-                print("S");
                 anim.Play(melee_slot.GetComponentInChildren<weapon_system>().weapon_animation.name);
             }
         }
@@ -367,6 +371,11 @@ public class player_movement : MonoBehaviour
             range_slot.transform.position = cam.transform.forward * .5f + cam.transform.position + cam.transform.right * .5f;
             range_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
             //range_slot.transform.Rotate(0, 0, -45);
+            
+        }
+        else
+        {
+            range_slot.transform.position = Vector3.zero;
         }
     }
 
@@ -403,7 +412,6 @@ public class player_movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        print(light_detector.SampledLightAmount);
 
         check_for_interactions();
 
@@ -520,7 +528,7 @@ public class player_movement : MonoBehaviour
 
     public void on_block_input(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale == 1 & weapon_id == 1)
         {
             if (context.performed)
             {

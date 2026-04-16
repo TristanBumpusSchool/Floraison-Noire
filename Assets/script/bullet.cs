@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-
     public float speed;
     public Vector3 direction;
     public string source;
 
     public int bounces = 0;
     public int homing = 0;
+
+    public Rigidbody rb;
 
     private bool start = false;
 
@@ -32,9 +33,9 @@ public class bullet : MonoBehaviour
 
         Invoke("delete", 10000);
 
-        GetComponent<Rigidbody>().linearVelocity = direction * speed;
+        rb.linearVelocity = direction * speed;
         Invoke("start_colliding", .1f);
-        transform.LookAt(GetComponent<Rigidbody>().linearVelocity + transform.position);
+        transform.LookAt(rb.linearVelocity + transform.position);
         
         float distance = Mathf.Infinity;
         
@@ -64,8 +65,8 @@ public class bullet : MonoBehaviour
     void FixedUpdate()
     {
 
-        GetComponent<Rigidbody>().linearVelocity = direction * speed;
-        transform.LookAt(GetComponent<Rigidbody>().linearVelocity + transform.position);
+        rb.linearVelocity = direction * speed;
+        transform.LookAt(rb.linearVelocity + transform.position);
         if (homing > 0 & target != null) { 
             direction = (target.transform.position - transform.position).normalized;
         }

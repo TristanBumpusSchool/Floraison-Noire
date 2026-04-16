@@ -28,6 +28,7 @@ public class upgrade_menu_script : MonoBehaviour
             while (true)
             {
                 GameObject upgrade = loot_table_manager.GetComponent<loot_table>().upgrade_loot_table(60,30,10);
+                print(upgrade);
 
                 if (upgrade_to_apply.IndexOf(upgrade) == -1)
                 {

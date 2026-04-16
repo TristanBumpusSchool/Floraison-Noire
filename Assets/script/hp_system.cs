@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class hp_system : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class hp_system : MonoBehaviour
             }
             if (gameObject.tag == "player")
             {
-                Destroy(gameObject);
+                SceneManager.LoadScene(2);
             }
         }
 
