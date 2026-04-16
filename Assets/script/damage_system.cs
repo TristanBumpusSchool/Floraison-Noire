@@ -45,7 +45,7 @@ public class damage_system : MonoBehaviour
             }
             else
             {
-                print("ow");
+                print(damage);
                 other.GetComponent<hp_system>().current_hp -= damage;
                 if (other.GetComponent<hp_system>().sound_to_play_on_hit != null)
                 {

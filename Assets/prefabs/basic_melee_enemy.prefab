@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::enemy_ai
   current_state: 1
   speed: 3
-  max_health: 5
+  max_health: 10
   hp_script: {fileID: 673907016583455325}
   base_damage: 4
   damage_script: {fileID: 6880864729892715900}
@@ -443,7 +443,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8404277000590108161}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 200
   m_LinearDamping: 1
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
