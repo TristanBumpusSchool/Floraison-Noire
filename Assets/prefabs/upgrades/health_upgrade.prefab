@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 5
   upgrade_effect_id: hp
   upgrade_desc: Augmente t'est vie total par 5
+  upgrade_image: {fileID: 21300000, guid: ea9ab090ad6fd8f4ea18522c2eaa6ec4, type: 3}

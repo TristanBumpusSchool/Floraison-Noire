@@ -24,8 +24,12 @@ public class stats_screen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        damage_text.text = "Degas: " + player_script.base_damage.ToString();
-        health_text.text = "Max Vie: " + player_script.max_health.ToString();
+        //Update stats screen ui
+
+        transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = (player_script.base_damage + player_script.weapon_damage).ToString();
+        transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = player_script.max_health.ToString();
+        transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = player_script.max_stamina.ToString();
+        transform.GetChild(9).GetComponent<TextMeshProUGUI>().text = player_script.reload_speed.ToString() + "s";
     }
 
     public void on_inv_input(InputAction.CallbackContext context)

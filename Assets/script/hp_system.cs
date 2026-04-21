@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class hp_system : MonoBehaviour
 {
@@ -35,8 +36,15 @@ public class hp_system : MonoBehaviour
             }
         }
 
-        if (hp_ui != null) { 
-            hp_ui.GetComponent<TextMeshProUGUI>().text = "PV:" + current_hp.ToString() + "/" + max_hp.ToString();
+        print(hp_ui);
+
+        if (hp_ui != null) {
+            if (hp_ui.GetComponent<Slider>().maxValue != max_hp)
+            {
+                hp_ui.GetComponent<Slider>().maxValue = max_hp;
+            }
+            hp_ui.GetComponent<Slider>().value = current_hp;
+            
         }
 
     }

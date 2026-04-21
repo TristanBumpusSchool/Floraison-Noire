@@ -7,6 +7,7 @@ public class upgrades_items : MonoBehaviour
     public int upgrade_effect;
     public string upgrade_effect_id;
     public string upgrade_desc;
+    public Sprite upgrade_image;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

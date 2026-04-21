@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class player_movement : MonoBehaviour
 {
@@ -50,12 +51,13 @@ public class player_movement : MonoBehaviour
     public float max_health = 100;
     public hp_system hp_script;
     public float base_damage = 1;
+    public float weapon_damage = 1;
     public damage_system damage_script;
     public float max_stamina = 100;
     public float stamina = 100;
     public float stamina_regen = 1;
-    public TextMeshProUGUI stamina_ui;
-    public float reacharge_speed = 1;
+    public Slider stamina_ui;
+    public GameObject stats_screen;
 
 
     public Rigidbody rb;
@@ -70,8 +72,11 @@ public class player_movement : MonoBehaviour
     public GameObject melee_slot;
     public GameObject range_slot;
 
+    public Image melee_slot_ui;
+    public Image range_slot_ui;
+
     [Header("Bullet Stats")]
-    public TextMeshProUGUI ammo_ui;
+    public Slider ammo_ui;
 
     public float reload_speed = 1f;
     public float ammo_max = 5;
@@ -93,7 +98,6 @@ public class player_movement : MonoBehaviour
     //Camera related
     [Header("Camera")]
     public Camera cam;
-    public float mouse_sensitivity = 2f;
     float cameraVerticalRotation = 0f;
     Vector2 camera_input = Vector2.zero;
 
@@ -224,33 +228,43 @@ public class player_movement : MonoBehaviour
         }
     }
 
-    void update_scripts()
+    void update_stats()
     {
-        int weapon_damage;
 
-        if (weapon_id == 0)
+        if (weapon_id == 1)
         {
             weapon_damage = melee_slot.GetComponentInChildren<weapon_system>().damage;
+            melee_slot_ui.color = new Color(26,163,0,255);
+            range_slot_ui.color =  Color.white;
         }
         else
         {
             weapon_damage = range_slot.GetComponentInChildren<weapon_system>().damage;
+            range_slot_ui.color = new Color(26, 163, 0, 255);
+            melee_slot_ui.color = Color.white;
         }
+
+        melee_slot_ui.gameObject.GetComponentInChildren<RawImage>().texture = melee_slot.GetComponentInChildren<weapon_system>().texture;
+        range_slot_ui.gameObject.GetComponentInChildren<RawImage>().texture = range_slot.GetComponentInChildren<weapon_system>().texture;
+
         damage_script.damage = base_damage + weapon_damage;
         hp_script.max_hp = max_health;
-        stamina_ui.text = stamina.ToString();
-        ammo_ui.text = "Ammo: " + ammo_current.ToString();
+        stamina_ui.maxValue = max_stamina;
+        stamina_ui.value = stamina;
+        ammo_ui.maxValue = ammo_max;
+        ammo_ui.value = ammo_current;
+
     }
 
     void melee_attack()
     {
         attacking = true;
-        attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
+        attack_box.transform.position = cam.transform.forward * melee_slot.GetComponentInChildren<weapon_system>().dist + cam.transform.position;
         attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
         Invoke("end_attack", .5f);
         if(bullet_on_melee > 0)
         {
-            ranged_attack();
+            original_range_attack();
         }
     }
 
@@ -278,7 +292,7 @@ public class player_movement : MonoBehaviour
         current_bullet.transform.position = cam.transform.forward + cam.transform.position;
         current_bullet.GetComponent<Rigidbody>().isKinematic = false;
         current_bullet.GetComponent<Collider>().enabled = true;
-        //current_bullet = null;
+        current_bullet = null;
     }
 
     void start_ranged_attack()
@@ -387,7 +401,7 @@ public class player_movement : MonoBehaviour
         interaction_object = null;
         if (ray.collider != null)
         {
-            if (ray.collider.GetComponent<interactble>() != null)
+            if (ray.collider.GetComponent<interactble>() != null & ray.distance < 2)
             {
                 interaction_object = ray.collider.gameObject;
             }
@@ -415,7 +429,7 @@ public class player_movement : MonoBehaviour
 
         check_for_interactions();
 
-        update_scripts();
+        update_stats();
 
         floor_detection();
 
@@ -503,7 +517,10 @@ public class player_movement : MonoBehaviour
                 }
                 if (!attacking & context.canceled)
                 {
-                    ranged_attack();
+                    if (current_bullet != null)
+                    {
+                        ranged_attack();
+                    }
                 }
             }
         }
@@ -557,7 +574,7 @@ public class player_movement : MonoBehaviour
 
     public void on_camera_input(InputAction.CallbackContext context)
     {
-        camera_input = context.ReadValue<Vector2>() * mouse_sensitivity;
+        camera_input = context.ReadValue<Vector2>() * settings.mouse_sensitivy;
     }
 
     public void on_interaction_input(InputAction.CallbackContext context)
