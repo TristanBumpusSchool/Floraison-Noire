@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 2
   upgrade_effect_id: dash_cost
   upgrade_desc: Deminu le prix du dash
+  upgrade_image: {fileID: 21300000, guid: 1f927d412d3a1fb4b8c7145829537381, type: 3}

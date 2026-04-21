@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class settings : MonoBehaviour
 {
 
     static public bool open_settings = false;
+    static public float mouse_sensitivy = 1f;
+    public Slider sensitivy;
     Vector3 start_pos = Vector3.zero;
     public GameObject first_button;
 
@@ -21,7 +24,7 @@ public class settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        mouse_sensitivy = sensitivy.value;
     }
 
     public void click_fullscreen() {
@@ -31,6 +34,18 @@ public class settings : MonoBehaviour
     public void click_resolution() {
         Screen.SetResolution(1920, 1080, Screen.fullScreen);
         print("R");
+    }
+
+    public void click_resume()
+    {
+        open_settings = false;
+        transform.position = new Vector3(0, 10000, 0);
+        first_button = GameObject.FindGameObjectWithTag("event_system").GetComponent<EventSystem>().currentSelectedGameObject;
+        general_manager.pausible_menu_open -= 1;
+        if (general_manager.last_opened_ui != null)
+        {
+            GameObject.FindGameObjectWithTag("event_system").GetComponent<EventSystem>().SetSelectedGameObject(general_manager.last_opened_ui.GetComponent<UI>().first_button);
+        }
     }
 
     public void on_settings_input(InputAction.CallbackContext contex)
@@ -49,6 +64,7 @@ public class settings : MonoBehaviour
             {
                 open_settings = false;
                 transform.position = new Vector3(0, 10000, 0);
+                first_button = GameObject.FindGameObjectWithTag("event_system").GetComponent<EventSystem>().currentSelectedGameObject;
                 general_manager.pausible_menu_open -= 1;
                 if(general_manager.last_opened_ui != null)
                 {

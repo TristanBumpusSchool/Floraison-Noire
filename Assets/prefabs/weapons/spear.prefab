@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::weapon_system
   damage: 1
+  dist: 2
+  texture: {fileID: 8400000, guid: df8253d446ecf934da539e4c55a38922, type: 2}
   weapon_animation: {fileID: 7400000, guid: 7a10c2788f3d4844c81e9c561fe2e9fd, type: 2}
 --- !u!1 &8725578759353452709
 GameObject:
@@ -295,6 +297,10 @@ PrefabInstance:
     - target: {fileID: 2930166858060724243, guid: 3393aef614571b24b98ef49bb878519a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644274161426127065, guid: 3393aef614571b24b98ef49bb878519a, type: 3}
+      propertyPath: m_text
+      value: Lance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

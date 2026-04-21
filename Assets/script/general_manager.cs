@@ -18,12 +18,10 @@ public class general_manager : MonoBehaviour
         if (pausible_menu_open == 0)
         {
             Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {
             Time.timeScale = 0.0f;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
 

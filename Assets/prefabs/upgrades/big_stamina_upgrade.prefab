@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 10
   upgrade_effect_id: stamina
   upgrade_desc: Augmente ton Stamina a un point FINAL
+  upgrade_image: {fileID: 21300000, guid: 260f977d417092f4bbb40cff472b6479, type: 3}

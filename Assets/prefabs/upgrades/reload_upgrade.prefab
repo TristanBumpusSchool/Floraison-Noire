@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 1
   upgrade_effect_id: reload
   upgrade_desc: Diminu le temps de recharche pour temps arme projectile
+  upgrade_image: {fileID: 21300000, guid: 19e8be9070524ce44babcbd222d7025d, type: 3}

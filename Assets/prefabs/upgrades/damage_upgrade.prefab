@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 5
   upgrade_effect_id: damage
   upgrade_desc: Augment tes Degas par 5
+  upgrade_image: {fileID: 21300000, guid: 66aacd63a8046e246a70c9366999a68d, type: 3}

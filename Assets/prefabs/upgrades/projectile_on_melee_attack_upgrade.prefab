@@ -48,3 +48,4 @@ MonoBehaviour:
   upgrade_effect: 1
   upgrade_effect_id: projectil_on_melee
   upgrade_desc: Crer un projectile quand tu attack avec ton arm principal
+  upgrade_image: {fileID: 21300000, guid: 49cb681ff8ea58f4ea5f0ee9b387fd92, type: 3}

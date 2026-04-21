@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   damage: 1
+  dist: 1.8
+  texture: {fileID: 8400000, guid: 8c51cc29a48ca1948929d6c848737d52, type: 2}
   weapon_animation: {fileID: 7400000, guid: 5de358f5400e1794298bac98bf1d2268, type: 2}
 --- !u!1 &3795220550786546143
 GameObject:
@@ -228,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 2930166858060724243, guid: 3393aef614571b24b98ef49bb878519a, type: 3}
       propertyPath: m_Name
       value: interaction_ui
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644274161426127065, guid: 3393aef614571b24b98ef49bb878519a, type: 3}
+      propertyPath: m_text
+      value: "\xC9p\xE9e"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

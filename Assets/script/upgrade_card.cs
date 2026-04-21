@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class upgrade_card : MonoBehaviour
 {
 
     public TextMeshProUGUI card_name;
     public TextMeshProUGUI card_disc;
+    public Image card_img;
     public int upgrade_effect_id;
 
     GameObject player;
@@ -22,6 +24,7 @@ public class upgrade_card : MonoBehaviour
         
         card_name.text = upgrade_selected.GetComponent<upgrades_items>().upgrade_name;
         card_disc.text = upgrade_selected.GetComponent<upgrades_items>().upgrade_desc;
+        card_img.sprite = upgrade_selected.GetComponent<upgrades_items>().upgrade_image;
     }
 
     // Update is called once per frame
@@ -34,7 +37,6 @@ public class upgrade_card : MonoBehaviour
 
     public void upgrade()
     {
-        print("S");
         string upgrade_effect_id = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect_id;
         int upgrade_effect = upgrade_selected.GetComponent<upgrades_items>().upgrade_effect;
 
