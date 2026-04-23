@@ -19,6 +19,7 @@ public class enemy_ai : MonoBehaviour
     public hp_system hp_script;
     public float base_damage = 1;
     public damage_system damage_script;
+    bool staggered = false;
 
     [Header("Range")]
     public float attack_range = 2;
@@ -33,10 +34,14 @@ public class enemy_ai : MonoBehaviour
     /// </summary>
     void state_manager()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
+        if (staggered) {
+            current_state = 1;
+        }
+        else if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
             RaycastHit ray;
-            Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            Physics.Raycast(transform.position + (transform.forward * .5f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            //Debug.DrawRay(transform.position + (transform.forward * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 1f);
             if (ray.collider.tag == "player")
             {
                 current_state = 3;
@@ -46,7 +51,7 @@ public class enemy_ai : MonoBehaviour
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
             RaycastHit ray;
-            Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            Physics.Raycast(transform.position + (transform.forward * .5f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
             //Debug.DrawRay(transform.position, (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
             if (ray.collider.tag == "player")
             {
@@ -93,6 +98,8 @@ public class enemy_ai : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        GetComponent<Animator>().SetInteger("state", current_state);
+
         //GetComponent<NavMeshAgent>().enabled = true;
         if (current_state == 2 & !GetComponent<Animator>().GetBool("attack"))
         {
@@ -144,5 +151,17 @@ public class enemy_ai : MonoBehaviour
     public void end_attack()
     {
         GetComponent<Animator>().SetBool("attack", false);
+    }
+
+    public void end_staggered()
+    {
+        staggered = false;
+    }
+
+    public void stager()
+    {
+        staggered = true;
+        GetComponent<Animator>().SetBool("attack", false);
+        GetComponent<Animator>().Play("enemy_stager");
     }
 }

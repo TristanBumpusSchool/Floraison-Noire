@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class settings : MonoBehaviour
@@ -14,7 +16,13 @@ public class settings : MonoBehaviour
     public GameObject[] sections;
     int current_section = 0;
 
-    GameObject event_system;
+    public Slider master_slider;
+    public Slider music_slider;
+    public Slider sfx_slider;
+
+    public AudioMixer audio_mixer;
+
+    public GameObject event_system;
 
 
 
@@ -32,7 +40,6 @@ public class settings : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        event_system = GameObject.FindGameObjectWithTag("event_system");
         start_pos = transform.position;
         transform.position = new Vector3(0, 10000, 0);
     }
@@ -41,8 +48,8 @@ public class settings : MonoBehaviour
     void Update()
     {
         mouse_sensitivy = sensitivy.value;
-        if(event_system != null ) 
-        { 
+        if(event_system.GetComponent<EventSystem>().currentSelectedGameObject != null ) 
+        {
             if (event_system.GetComponent<EventSystem>().currentSelectedGameObject.name == "graphics" & current_section != 0) {
             current_section = 0;
             change_section();
@@ -85,6 +92,18 @@ public class settings : MonoBehaviour
         }
     }
 
+    public void click_reload()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void click_exit()
+    {
+        Application.Quit();
+    }
+
+
+
     public void on_settings_input(InputAction.CallbackContext contex)
     {
         if (contex.performed)
@@ -110,4 +129,15 @@ public class settings : MonoBehaviour
             }
         }
     }
+
+    public void on_master_vol_change() { 
+        audio_mixer.SetFloat("master_vol",Mathf.Log(master_slider.value)*20);
+    }
+    public void on_music_vol_change() {
+        audio_mixer.SetFloat("music_vol", Mathf.Log(music_slider.value) * 20);
+    }
+    public void on_sfx_vol_change() {
+        audio_mixer.SetFloat("sfx_vol", Mathf.Log(sfx_slider.value) * 20);
+    }
+
 }

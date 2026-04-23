@@ -49,6 +49,10 @@ public class damage_system : MonoBehaviour
                 {
                     other.GetComponent<AudioSource>().PlayOneShot(other.GetComponent<hp_system>().sound_to_play_on_hit);
                 }
+                if(other.GetComponent<enemy_ai>() != null)
+                { 
+                    other.GetComponent<enemy_ai>().stager();
+                }
             }
         }
     }
