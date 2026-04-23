@@ -36,7 +36,6 @@ public class hp_system : MonoBehaviour
             }
         }
 
-        print(hp_ui);
 
         if (hp_ui != null) {
             if (hp_ui.GetComponent<Slider>().maxValue != max_hp)

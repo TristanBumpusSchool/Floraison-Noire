@@ -16,12 +16,12 @@ public class collectable : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("enemy").Length == 0) {
             GetComponent<SphereCollider>().enabled = true;
-            GetComponent<MeshRenderer>().enabled = true;
+            GetComponentInChildren<MeshRenderer>().enabled = true;
         }
         else
         {
             GetComponent<SphereCollider>().enabled = false;
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
         }
     }
 
