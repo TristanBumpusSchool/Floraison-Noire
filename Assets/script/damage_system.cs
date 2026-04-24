@@ -51,7 +51,7 @@ public class damage_system : MonoBehaviour
                 }
                 if(other.GetComponent<enemy_ai>() != null)
                 { 
-                    other.GetComponent<enemy_ai>().stager();
+                    other.GetComponent<enemy_ai>().stagger();
                 }
             }
         }

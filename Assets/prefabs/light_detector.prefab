@@ -49,12 +49,12 @@ MonoBehaviour:
   lights: []
   lightRaycastMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
   perceivedBrightness: 1
   lightSampleEvaluationMode: 0
   lightAdjustmentMode: 1
   bakedLightSampleMode: 1
-  bakedLightContribution: 1
+  bakedLightContribution: 0
   runInEditor: 0
   drawSamplePointGizmos: 0
   samplePointGizmoSize: 0.1

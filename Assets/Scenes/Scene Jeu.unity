@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 219367394}
   - component: {fileID: 219367393}
   - component: {fileID: 219367392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WEW (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2659,7 +2659,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219367391}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 27269
@@ -2711,7 +2711,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -7243,7 +7243,7 @@ GameObject:
   - component: {fileID: 533100403}
   - component: {fileID: 533100402}
   - component: {fileID: 533100401}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7287,7 +7287,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533100400}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2159417
@@ -7339,7 +7339,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -9987,6 +9987,14 @@ PrefabInstance:
     - target: {fileID: 813032921187423109, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: perceivedBrightness
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 813032921187423109, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: bakedLightSampleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 813032921187423109, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
+      propertyPath: lightRaycastMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1168524809102325826, guid: 517f2776e47e2114cbe1bcdd6f7f4ca9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16044,7 +16052,7 @@ GameObject:
   - component: {fileID: 1128537987}
   - component: {fileID: 1128537989}
   - component: {fileID: 1128537988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16103,7 +16111,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128537986}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2165090
@@ -16155,7 +16163,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -16298,7 +16306,7 @@ GameObject:
   - component: {fileID: 1147139204}
   - component: {fileID: 1147139203}
   - component: {fileID: 1147139202}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WEW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16342,7 +16350,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147139201}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 5000
@@ -16394,7 +16402,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -16425,7 +16433,7 @@ GameObject:
   - component: {fileID: 1148231632}
   - component: {fileID: 1148231634}
   - component: {fileID: 1148231633}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16484,7 +16492,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148231631}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
@@ -16536,7 +16544,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -18146,7 +18154,7 @@ GameObject:
   - component: {fileID: 1272335212}
   - component: {fileID: 1272335211}
   - component: {fileID: 1272335210}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18190,7 +18198,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272335209}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 41502.4
@@ -18242,7 +18250,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -19010,7 +19018,7 @@ GameObject:
   - component: {fileID: 1334807352}
   - component: {fileID: 1334807351}
   - component: {fileID: 1334807350}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WEW (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19054,7 +19062,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334807349}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 5000
@@ -19106,7 +19114,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -19339,7 +19347,7 @@ GameObject:
   - component: {fileID: 1352833828}
   - component: {fileID: 1352833827}
   - component: {fileID: 1352833826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19383,7 +19391,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352833825}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 16392
@@ -19435,7 +19443,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -23018,7 +23026,7 @@ GameObject:
   - component: {fileID: 1591301485}
   - component: {fileID: 1591301487}
   - component: {fileID: 1591301486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23077,7 +23085,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591301484}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 5000
@@ -23129,7 +23137,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -28544,7 +28552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1969323509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lights
   m_TagString: lights
   m_Icon: {fileID: 0}

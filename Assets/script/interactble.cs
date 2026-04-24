@@ -39,6 +39,7 @@ public class interactble : MonoBehaviour
                 Vector3 start_pos = transform.position;
                 
                 player.GetComponent<player_movement>().melee_slot.transform.GetChild(0).transform.position = start_pos;
+                player.GetComponent<player_movement>().melee_slot.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 0, 0);
                 player.GetComponent<player_movement>().melee_slot.transform.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
                 player.GetComponent<player_movement>().melee_slot.transform.GetChild(0).transform.parent = null;
                 
@@ -51,6 +52,7 @@ public class interactble : MonoBehaviour
                 Vector3 start_pos = transform.position;
 
                 player.GetComponent<player_movement>().range_slot.transform.GetChild(0).transform.position = start_pos;
+                player.GetComponent<player_movement>().range_slot.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 0, 0);
                 player.GetComponent<player_movement>().range_slot.transform.GetChild(0).GetComponentInChildren<Collider>().enabled = true;
                 player.GetComponent<player_movement>().range_slot.transform.GetChild(0).transform.parent = null;
 

@@ -322,6 +322,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
+      propertyPath: m_ImportantGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
       propertyPath: m_Name
       value: HongKongBuildA
@@ -329,6 +341,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
       propertyPath: m_TagString
       value: wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 32e2bcc97c052164ea1ffc38919e9558, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

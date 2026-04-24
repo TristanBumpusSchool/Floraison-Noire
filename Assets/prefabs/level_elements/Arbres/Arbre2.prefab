@@ -80,9 +80,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1696588603673291755, guid: aebc5e141a047b043b46eca777d86cb6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aebc5e141a047b043b46eca777d86cb6, type: 3}
       propertyPath: m_Name
       value: abre2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165112444651802388, guid: aebc5e141a047b043b46eca777d86cb6, type: 3}
+      propertyPath: m_ImportantGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165112444651802388, guid: aebc5e141a047b043b46eca777d86cb6, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5238494106332311595, guid: aebc5e141a047b043b46eca777d86cb6, type: 3}
       propertyPath: m_LocalPosition.x

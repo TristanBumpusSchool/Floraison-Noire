@@ -207,7 +207,7 @@ public class player_movement : MonoBehaviour
     void floor_detection()
     {
         RaycastHit ray;
-        Physics.Raycast(transform.position, Vector3.down, out ray,1.1f);
+        Physics.Raycast(transform.position, Vector3.down, out ray,2.1f);
         if(ray.collider != null)
         {
             on_floor = true;
@@ -260,8 +260,8 @@ public class player_movement : MonoBehaviour
     {
         attacking = true;
         attack_box.transform.position = cam.transform.forward * melee_slot.GetComponentInChildren<weapon_system>().dist + cam.transform.position;
-        attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
-        Invoke("end_attack", .5f);
+        attack_box.transform.LookAt(cam.transform.forward * 5f + cam.transform.position);
+        Invoke("end_attack", 1f);
         if(bullet_on_melee > 0)
         {
             original_range_attack();
@@ -334,8 +334,8 @@ public class player_movement : MonoBehaviour
     void block(bool input)
     {
         blocking = input;
-        attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
-        attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+        attack_box.transform.position = cam.transform.forward * 4f + cam.transform.position;
+        attack_box.transform.LookAt(cam.transform.forward * 5f + cam.transform.position);
         attack_box.transform.Rotate(0, 0, -45);
         can_parry = true;
         Invoke("remove_parry", parry_time);
@@ -348,7 +348,7 @@ public class player_movement : MonoBehaviour
 
     void ammo_reload()
     {
-        if(light_detector.SampledLightAmount > .75)
+        if(light_detector.SampledLightAmount > 2)
         {
             ammo_current += 1;
             if(ammo_current > ammo_max)
@@ -385,11 +385,14 @@ public class player_movement : MonoBehaviour
             range_slot.transform.position = cam.transform.forward * .5f + cam.transform.position + cam.transform.right * .5f;
             range_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
             //range_slot.transform.Rotate(0, 0, -45);
-            
+            melee_slot.transform.position = Vector3.zero + Vector3.back;
+
         }
         else
         {
-            range_slot.transform.position = Vector3.zero;
+            melee_slot.transform.position = cam.transform.forward * .75f + cam.transform.position + cam.transform.right * .75f;
+            melee_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            range_slot.transform.position = Vector3.zero + Vector3.back;
         }
     }
 
@@ -397,7 +400,6 @@ public class player_movement : MonoBehaviour
     {
         RaycastHit ray;
         Physics.Raycast(cam.transform.position, cam.transform.forward, out ray, 1000);
-        Debug.DrawRay(cam.transform.position, cam.transform.forward * ray.distance, Color.red);
         interaction_object = null;
         if (ray.collider != null)
         {

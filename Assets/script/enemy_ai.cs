@@ -40,8 +40,9 @@ public class enemy_ai : MonoBehaviour
         else if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
             RaycastHit ray;
-            Physics.Raycast(transform.position + (transform.forward * .5f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
             //Debug.DrawRay(transform.position + (transform.forward * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 1f);
+            print(ray.collider);
             if (ray.collider.tag == "player")
             {
                 current_state = 3;
@@ -51,8 +52,9 @@ public class enemy_ai : MonoBehaviour
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
             RaycastHit ray;
-            Physics.Raycast(transform.position + (transform.forward * .5f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
-            //Debug.DrawRay(transform.position, (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
+            Physics.Raycast(transform.position + (transform.up * 1f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            Debug.DrawRay(transform.position + (transform.up * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
+            print(ray.collider);
             if (ray.collider.tag == "player")
             {
                 current_state = 2;
@@ -104,7 +106,7 @@ public class enemy_ai : MonoBehaviour
         if (current_state == 2 & !GetComponent<Animator>().GetBool("attack"))
         {
             player_last_position = player.transform.position;
-            if (light_detector.SampledLightAmount > .75f) 
+            if (light_detector.SampledLightAmount > 2f) 
             { 
                 GetComponent<NavMeshAgent>().destination = player.transform.position;
                 GetComponent<NavMeshAgent>().speed = speed;
@@ -158,10 +160,11 @@ public class enemy_ai : MonoBehaviour
         staggered = false;
     }
 
-    public void stager()
+    public void stagger()
     {
         staggered = true;
         GetComponent<Animator>().SetBool("attack", false);
-        GetComponent<Animator>().Play("enemy_stager");
+        GetComponent<Animator>().Play("stagger");
+        Invoke("end_staggered", 1f);
     }
 }

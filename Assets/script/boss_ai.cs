@@ -35,38 +35,14 @@ public class boss_ai : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
-            RaycastHit ray;
-            Physics.Raycast(transform.position + (transform.forward * 1f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
-            if (ray.collider != null)
-            {
-                if (ray.collider.tag == "player")
-                {
-                    current_state = 3;
-                }
-            }
+            current_state = 3;
 
         }
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
-            RaycastHit ray;
-            Physics.Raycast(transform.position + (transform.forward * 1f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
             //Debug.DrawRay(transform.position, (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
-            if (ray.collider.tag == "player")
-            {
-                current_state = 2;
-            }
-            else
-            {
-                if(current_state == 2 || current_state == 4)
-                {
-                    current_state = 4;
-                }
-                else
-                {
-                    current_state = 1;
-                }
-              
-            }
+            current_state = 2;
+            
         }
         else if(current_state == 2 & Vector3.Distance(player.transform.position, transform.position) > follow_range || current_state == 4)
         {
