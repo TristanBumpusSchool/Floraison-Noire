@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46697cd6225733248a4ba60627e0a689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::weapon_system
-  damage: 1
+  damage: 2
   dist: 1.8
   texture: {fileID: 8400000, guid: dee4465bb6543e844856a05c359c30c3, type: 2}
   weapon_animation: {fileID: 0}

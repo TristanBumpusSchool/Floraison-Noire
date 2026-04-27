@@ -6,6 +6,7 @@ public class damage_system : MonoBehaviour
     public string source = "none";
 
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +32,7 @@ public class damage_system : MonoBehaviour
                     other.GetComponent<player_movement>().blocking = false;
 
                     other.GetComponent<hp_system>().current_hp -= damage;
+                    other.GetComponentInChildren<Animator>().Play("flashing_red");
                     if (other.GetComponent<hp_system>().sound_to_play_on_hit != null)
                     {
                         other.GetComponent<AudioSource>().PlayOneShot(other.GetComponent<hp_system>().sound_to_play_on_hit);
@@ -49,7 +51,13 @@ public class damage_system : MonoBehaviour
                 {
                     other.GetComponent<AudioSource>().PlayOneShot(other.GetComponent<hp_system>().sound_to_play_on_hit);
                 }
-                if(other.GetComponent<enemy_ai>() != null)
+                if (other.GetComponent<hp_system>().hit_effect != null)
+                {
+                    GameObject effect = Instantiate(other.GetComponent<hp_system>().hit_effect);
+                    effect.transform.position = other.gameObject.transform.position;
+                    effect.transform.LookAt(-transform.forward);
+                }
+                if (other.GetComponent<enemy_ai>() != null)
                 { 
                     other.GetComponent<enemy_ai>().stagger();
                 }

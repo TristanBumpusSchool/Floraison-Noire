@@ -6,7 +6,7 @@ public class boss_ai : MonoBehaviour
 {
 
     //Diffrent states : 1 = idle/wander 2 = fallow player, 3 = attack, 4 = go to last location
-    public int current_state = 1;
+    public int current_state = -1;
     int last_attack = 0;
 
 
@@ -27,6 +27,9 @@ public class boss_ai : MonoBehaviour
 
     [Header("Lights")]
     public LightDetector light_detector;
+
+    bool turn_on = false;
+
 
     /// <summary>
     /// Switchs between the diffrent stats of the enemy
@@ -54,6 +57,14 @@ public class boss_ai : MonoBehaviour
         }
     }
 
+    void start_ai()
+    {
+        turn_on = true;
+        GetComponentInChildren<Animator>().SetBool("on", true);
+        GetComponent<NavMeshAgent>().enabled = true;
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -62,6 +73,7 @@ public class boss_ai : MonoBehaviour
 
         GetComponent<hp_system>().max_hp = max_health;
         GetComponent<hp_system>().current_hp = max_health;
+        Invoke("start_ai", 3.5f);
     }
 
     private void OnDisable()
@@ -72,8 +84,9 @@ public class boss_ai : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         //GetComponent<NavMeshAgent>().enabled = true;
-        if (current_state == 2 & GetComponent<Animator>().GetInteger("attack") == 0)
+        if (current_state == 2 & GetComponentInChildren<Animator>().GetInteger("attack") == 0)
         {
             player_last_position = player.transform.position;
             if (light_detector.SampledLightAmount > .75f)
@@ -104,33 +117,38 @@ public class boss_ai : MonoBehaviour
         }
         if (current_state == 3)
         {
-            if (GetComponent<Animator>().GetInteger("attack") == 0) {
+            GetComponent<NavMeshAgent>().speed = 0;
+            if (GetComponentInChildren<Animator>().GetInteger("attack") == 0) {
                 while (true)
                 {
-                    GetComponent<Animator>().SetInteger("attack", Random.Range(1, 4));
-                    if(last_attack != GetComponent<Animator>().GetInteger("attack"))
+                    GetComponentInChildren<Animator>().SetInteger("attack", Random.Range(1, 4));
+                    if(last_attack != GetComponentInChildren<Animator>().GetInteger("attack"))
                     {
+                        last_attack = GetComponentInChildren<Animator>().GetInteger("attack");
+                        Invoke("start_attack_timer",.3f);
                         break;
                     }
                 }
                 transform.LookAt(player.transform.position);
             }
         }
-        else
+
+
+
+        if (turn_on)
         {
-            GetComponent<Animator>().SetInteger("attack", 0);
+            state_manager();
         }
-
-
-
-
-
-        state_manager();
-
     }
 
     public void end_attack()
     {
-        GetComponent<Animator>().SetInteger("attack", 0);
+        GetComponentInChildren<Animator>().SetInteger("attack", 0);
+    }
+
+    void start_attack_timer()
+    {
+        print(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Invoke("end_attack", GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length - .3f);
     }
 }

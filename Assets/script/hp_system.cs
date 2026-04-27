@@ -10,14 +10,13 @@ public class hp_system : MonoBehaviour
     public float current_hp;
 
     public GameObject hp_ui;
+    public GameObject hit_effect;
     public AudioClip sound_to_play_on_hit;
-    GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         current_hp = max_hp;
-        player = GameObject.FindWithTag("player");
     }
 
     // Update is called once per frame
@@ -28,7 +27,9 @@ public class hp_system : MonoBehaviour
         }
         if (current_hp <= 0) {
             if (gameObject.tag == "enemy") {
-                gameObject.transform.SetParent(GameObject.FindWithTag("enemy_manager").transform.GetChild(0).transform, false);
+                gameObject.GetComponent<enemy_ai>().staggered = true;
+                gameObject.GetComponent<Collider>().enabled = false;
+                gameObject.GetComponent<Animator>().Play("death");
             }
             if (gameObject.tag == "player")
             {

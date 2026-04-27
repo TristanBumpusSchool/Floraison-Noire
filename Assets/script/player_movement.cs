@@ -113,7 +113,17 @@ public class player_movement : MonoBehaviour
     //Interactions
     public GameObject interaction_object = null;
 
+    //Cutscenes
+    bool boss_intro = false;
+    public GameObject boss;
 
+
+
+    void end_boss_intro()
+    {
+        boss_intro = false;
+        GetComponent<PlayerInput>().enabled = true;
+    }
 
     public void end_attack()
     {
@@ -410,6 +420,17 @@ public class player_movement : MonoBehaviour
         }
     }
 
+    void cheats()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            foreach (var item in GameObject.FindGameObjectsWithTag("enemy"))
+            {
+                item.GetComponent<hp_system>().current_hp = 0;
+            }
+        }
+    }
+
 
 
     void Start()
@@ -427,7 +448,7 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        cheats();
 
         check_for_interactions();
 
@@ -435,9 +456,17 @@ public class player_movement : MonoBehaviour
 
         floor_detection();
 
-        movement();
+        if (!boss_intro)
+        {
+            movement();
 
-        camera_movement();
+            camera_movement();
+        }
+        else
+        {
+            cam.transform.LookAt(boss.transform.position);
+            rb.linearVelocity = Vector3.zero;
+        }
 
         update_animations();
 
@@ -452,6 +481,13 @@ public class player_movement : MonoBehaviour
 
 
     //Public functions
+
+    public void start_boss_intro()
+    {
+        boss_intro = true;
+        GetComponent<PlayerInput>().enabled = false;
+        Invoke("end_boss_intro", 3.5f);
+    }
 
     public void parry()
     {
