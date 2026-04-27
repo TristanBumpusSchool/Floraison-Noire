@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Upgrade de Vie
+  upgrade_name: "Am\xE9lioration de Vie"
   upgrade_effect: 5
   upgrade_effect_id: hp
-  upgrade_desc: Augmente t'est vie total par 5
+  upgrade_desc: Augmente ton HP total par 5
   upgrade_image: {fileID: 21300000, guid: ea9ab090ad6fd8f4ea18522c2eaa6ec4, type: 3}

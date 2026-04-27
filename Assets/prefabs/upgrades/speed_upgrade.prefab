@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Plus vite
+  upgrade_name: "D\xE9placement plus rapide"
   upgrade_effect: 2
   upgrade_effect_id: speed
-  upgrade_desc: Augment ta vitess legerment
+  upgrade_desc: Augmente ta vitesse de mouvement
   upgrade_image: {fileID: 21300000, guid: 33f3a1cbe7286d045b20b8e4a84f2f6e, type: 3}

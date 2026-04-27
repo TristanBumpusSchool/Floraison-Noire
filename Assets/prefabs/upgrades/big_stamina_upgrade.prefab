@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Upgrade de Stamina FINAL
+  upgrade_name: "Am\xE9lioration d'endurance "
   upgrade_effect: 10
   upgrade_effect_id: stamina
-  upgrade_desc: Augmente ton Stamina a un point FINAL
+  upgrade_desc: Augmente ton endurance par 10
   upgrade_image: {fileID: 21300000, guid: 260f977d417092f4bbb40cff472b6479, type: 3}

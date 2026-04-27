@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Upgrade de Flesh Rebon
+  upgrade_name: Balles rebondissantes
   upgrade_effect: 1
   upgrade_effect_id: bounce
-  upgrade_desc: Crer des ball qui rebondi sur les mur
+  upgrade_desc: Tes projectiles rebondissent sur les murs!
   upgrade_image: {fileID: 21300000, guid: 92350b5fc32e35946aaae724a1e38c45, type: 3}

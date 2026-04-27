@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719394957c9580e49b81c11096477d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::upgrades_items
-  upgrade_name: Upgrade de Flesh trackeur
+  upgrade_name: Projectiles automatique
   upgrade_effect: 1
   upgrade_effect_id: homing
-  upgrade_desc: Augmente t'est vie total par 5
+  upgrade_desc: Tes projectiles visent automatiquement les ennemis!
   upgrade_image: {fileID: 21300000, guid: 01c576976c4b888479b9113708375f61, type: 3}
