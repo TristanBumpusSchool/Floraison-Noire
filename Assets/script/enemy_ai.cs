@@ -20,6 +20,7 @@ public class enemy_ai : MonoBehaviour
     public float base_damage = 1;
     public damage_system damage_script;
     public bool staggered = false;
+    Vector3 random_pos = Vector3.zero;
 
     [Header("Range")]
     public float attack_range = 2;
@@ -42,7 +43,6 @@ public class enemy_ai : MonoBehaviour
             RaycastHit ray;
             Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
             //Debug.DrawRay(transform.position + (transform.forward * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 1f);
-            print(ray.collider);
             if (ray.collider != null)
             {
                 if (ray.collider.tag == "player")
@@ -57,7 +57,6 @@ public class enemy_ai : MonoBehaviour
             RaycastHit ray;
             Physics.Raycast(transform.position + (transform.up * 1f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
             Debug.DrawRay(transform.position + (transform.up * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
-            print(ray.collider);
             if (ray.collider != null)
             {
                 if (ray.collider.tag == "player")
@@ -94,6 +93,7 @@ public class enemy_ai : MonoBehaviour
         player = GameObject.FindWithTag("player");
         staggered = false;
         GetComponent<Collider>().enabled = true;
+        random_pos = new Vector3(Random.Range(0f,1f),0,Random.Range(0f, 1f)).normalized;
 
         GetComponent<hp_system>().max_hp = max_health;
         GetComponent<hp_system>().current_hp = max_health;
@@ -141,13 +141,13 @@ public class enemy_ai : MonoBehaviour
             if (light_detector.SampledLightAmount > 2f) 
             {
                 GetComponent<NavMeshAgent>().isStopped = false;
-                GetComponent<NavMeshAgent>().destination = player.transform.position;
+                GetComponent<NavMeshAgent>().destination = player.transform.position + random_pos;
                 GetComponent<NavMeshAgent>().speed = speed;
             }
             else
             {
                 GetComponent<NavMeshAgent>().isStopped = false;
-                GetComponent<NavMeshAgent>().destination = player.transform.position;
+                GetComponent<NavMeshAgent>().destination = player.transform.position + random_pos; ;
                 GetComponent<NavMeshAgent>().speed = speed/2;
             }
         }

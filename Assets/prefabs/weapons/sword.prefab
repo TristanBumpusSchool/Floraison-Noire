@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   damage: 5
-  dist: 3
+  dist: 2
   texture: {fileID: 8400000, guid: 8c51cc29a48ca1948929d6c848737d52, type: 2}
   weapon_animation: {fileID: 7400000, guid: 5de358f5400e1794298bac98bf1d2268, type: 2}
 --- !u!1 &3795220550786546143

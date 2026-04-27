@@ -269,8 +269,9 @@ public class player_movement : MonoBehaviour
     void melee_attack()
     {
         attacking = true;
-        attack_box.transform.position = cam.transform.forward * melee_slot.GetComponentInChildren<weapon_system>().dist + cam.transform.position;
-        attack_box.transform.LookAt(cam.transform.forward * 5f + cam.transform.position);
+        attack_box.transform.position = cam.transform.position + cam.transform.forward * melee_slot.GetComponentInChildren<weapon_system>().dist;
+        print(cam.transform.position + cam.transform.forward * melee_slot.GetComponentInChildren<weapon_system>().dist);
+        attack_box.transform.LookAt(cam.transform.forward * 10f + cam.transform.position);
         Invoke("end_attack", 1f);
         if(bullet_on_melee > 0)
         {
@@ -413,7 +414,7 @@ public class player_movement : MonoBehaviour
         interaction_object = null;
         if (ray.collider != null)
         {
-            if (ray.collider.GetComponent<interactble>() != null & ray.distance < 2)
+            if (ray.collider.GetComponent<interactble>() != null & ray.distance < 5)
             {
                 interaction_object = ray.collider.gameObject;
             }
@@ -471,7 +472,7 @@ public class player_movement : MonoBehaviour
         update_animations();
 
         if (blocking) {
-            attack_box.transform.position = cam.transform.forward * 1.8f + cam.transform.position;
+            attack_box.transform.position = cam.transform.forward * 2f + cam.transform.position;
             attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
             attack_box.transform.Rotate(0, 0, -45);
         }
