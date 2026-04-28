@@ -32,7 +32,9 @@ public class damage_system : MonoBehaviour
                     other.GetComponent<player_movement>().blocking = false;
 
                     other.GetComponent<hp_system>().current_hp -= damage;
-                    other.GetComponentInChildren<Animator>().Play("flashing_red");
+                    //Play flashing red effect
+                    other.transform.GetChild(6).GetComponent<Animator>().Play("flashing_red");
+                    print(other.transform.GetChild(6).GetComponent<Animator>().GetCurrentAnimatorStateInfo(0));
                     if (other.GetComponent<hp_system>().sound_to_play_on_hit != null)
                     {
                         other.GetComponent<AudioSource>().PlayOneShot(other.GetComponent<hp_system>().sound_to_play_on_hit);

@@ -41,7 +41,7 @@ public class door : MonoBehaviour
             enemies_spawners_to_activate.SetActive(true);
             if(music_change != null)
             {
-                other.gameObject.GetComponentInChildren<AudioSource>().clip = music_change;
+                other.gameObject.transform.GetChild(7).GetComponent<AudioSource>().clip = music_change;
             }
         }
     }

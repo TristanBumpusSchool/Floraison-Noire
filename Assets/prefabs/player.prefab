@@ -481,6 +481,7 @@ MonoBehaviour:
   max_hp: 100
   current_hp: 0
   hp_ui: {fileID: 6279725491881748561}
+  hit_effect: {fileID: 0}
   sound_to_play_on_hit: {fileID: 8300000, guid: 4d7b68a8681f57d4f8560ffc126f83d3, type: 3}
 --- !u!136 &8415818152791209940
 CapsuleCollider:
@@ -776,7 +777,7 @@ GameObject:
   - component: {fileID: 7910000954636903962}
   m_Layer: 2
   m_Name: attack_box
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1157,7 +1158,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 8eca0470cf56dc5449e90c84b5f31a13, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1696,7 +1697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7928422539785120372, guid: b7b90e95788632140abffa8929d167e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8216799196034308951, guid: b7b90e95788632140abffa8929d167e5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1764,7 +1765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8771498282349267772, guid: b7b90e95788632140abffa8929d167e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9083562570293928098, guid: b7b90e95788632140abffa8929d167e5, type: 3}
       propertyPath: m_LocalPosition.z

@@ -114,7 +114,15 @@ public class enemy_ai : MonoBehaviour
         GetComponent<NavMeshAgent>().enabled = false;
     }
 
-
+    private void Update()
+    {
+        if (!GetComponent<NavMeshAgent>().enabled)
+        {
+            GetComponent<NavMeshAgent>().enabled = true;
+            GetComponent<NavMeshAgent>().Warp(transform.position);
+            GetComponent<NavMeshAgent>().isStopped = false;
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -123,12 +131,6 @@ public class enemy_ai : MonoBehaviour
         state_manager();
 
         GetComponent<Animator>().SetInteger("state", current_state);
-        if (!GetComponent<NavMeshAgent>().enabled)
-        {
-            GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<NavMeshAgent>().Warp(transform.position);
-            GetComponent<NavMeshAgent>().isStopped = false;
-        }
 
 
         if (current_state == 2 & !GetComponent<Animator>().GetBool("attack"))

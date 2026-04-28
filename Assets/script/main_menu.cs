@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -8,11 +9,17 @@ public class main_menu : MonoBehaviour
     public Animator animator;
     public EventSystem event_system;
     public GameObject[] default_buttons;
+    public TextMeshProUGUI message;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Screen.SetResolution(1920, 1080, Screen.fullScreen);
+        if (message != null)
+        {
+            message.text = general_manager.win_message;
+        }
+
     }
 
     // Update is called once per frame

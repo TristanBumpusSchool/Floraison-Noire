@@ -5,10 +5,12 @@ using TMPro;
 public class general_manager : MonoBehaviour
 {
     static public int pausible_menu_open = 0;
+    static public string win_message;
     static public GameObject last_opened_ui;
 
     void Start()
     {
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame

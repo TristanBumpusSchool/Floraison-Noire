@@ -23,20 +23,21 @@ public class loot_table : MonoBehaviour
 
 
     public GameObject upgrade_loot_table(int commun_chance = 100,int rare_chance = 0,int legendary_chance = 0) {
-        int chance = Random.Range(1, 1);
+        int chance = Random.Range(1, 100);
+        print(chance);
         if (chance <= commun_chance)
         {
             int upgrade_id = Random.Range(0, upgrades_commun.Length - 1);
             GameObject final_upgrade = upgrades_commun[upgrade_id];
             return final_upgrade;
-    }
-        if (chance <= rare_chance)
+        }
+        if (chance <= rare_chance + commun_chance)
         {
             int upgrade_id = Random.Range(0, upgrades_rare.Length - 1);
             GameObject final_upgrade = upgrades_rare[upgrade_id];
             return final_upgrade;
         }
-        if (chance <= legendary_chance)
+        if (chance <= legendary_chance + rare_chance + commun_chance)
         {
             int upgrade_id = Random.Range(0, upgrades_legendary.Length - 1);
             GameObject final_upgrade = upgrades_legendary[upgrade_id];

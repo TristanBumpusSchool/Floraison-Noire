@@ -293,6 +293,9 @@ public class player_movement : MonoBehaviour
             b.GetComponent<damage_system>().source = "player";
             b.GetComponent<bullet>().homing = bullet_homing;
             b.GetComponent<bullet>().bounces = bullet_bounce;
+            b.GetComponent<bullet>().enabled = true;
+            b.GetComponent<Rigidbody>().isKinematic = false;
+            b.GetComponent<Collider>().enabled = true;
         }
     }
 
@@ -473,7 +476,7 @@ public class player_movement : MonoBehaviour
 
         if (blocking) {
             attack_box.transform.position = cam.transform.forward * 2f + cam.transform.position;
-            attack_box.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            attack_box.transform.LookAt(cam.transform.forward * 5f + cam.transform.position);
             attack_box.transform.Rotate(0, 0, -45);
         }
 
