@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   visible_door: {fileID: 8743145065478506437}
   enemies_spawners_to_activate: {fileID: 0}
+  music_change: {fileID: 0}
 --- !u!65 &299614184268737321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340,5 +341,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.27988777, y: 0.17407595, z: 0.015452337}
-  m_Center: {x: 0.93994445, y: 0.3074476, z: -0.00081727654}
+  m_Size: {x: 0.27988777, y: 0.7790067, z: 0.015452337}
+  m_Center: {x: 0.93994445, y: 0.60991335, z: -0.00081727654}

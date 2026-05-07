@@ -67,6 +67,7 @@ public class player_movement : MonoBehaviour
     [Header("Attack")]
     public GameObject bullet;
     public GameObject attack_box;
+    public GameObject shield;
     public int weapon_id = 1;
     public bool attacking = false;
     public GameObject melee_slot;
@@ -77,6 +78,7 @@ public class player_movement : MonoBehaviour
 
     [Header("Bullet Stats")]
     public Slider ammo_ui;
+    public TextMeshProUGUI ammo_text_ui;
 
     public float reload_speed = 1f;
     public float ammo_max = 5;
@@ -91,7 +93,7 @@ public class player_movement : MonoBehaviour
 
     [Header("Blocking")]
     public bool blocking = false;
-    public int block_cost = 10;
+    public int block_cost = 25;
     public bool can_parry = false;
     public float parry_time = 0.1f;
 
@@ -132,11 +134,13 @@ public class player_movement : MonoBehaviour
 
     void camera_movement()
     {
+        if(transform.rotation.x != 0 || transform.rotation.z != 0) {
+            //transform.localEulerAngles = Vector3.forward * transform.rotation.y;
+        }
 
         //Camera movement from this tutorial (03/02) : https://www.youtube.com/watch?v=5Rq8A4H6Nzw
 
         // Rotate the Camera around its local X axis
-
         cameraVerticalRotation -= camera_input.y;
         cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 80f);
         cam.transform.localEulerAngles = Vector3.right * cameraVerticalRotation;
@@ -263,6 +267,7 @@ public class player_movement : MonoBehaviour
         stamina_ui.value = stamina;
         ammo_ui.maxValue = ammo_max;
         ammo_ui.value = ammo_current;
+        ammo_text_ui.text = ammo_current.ToString();
 
     }
 
@@ -426,12 +431,15 @@ public class player_movement : MonoBehaviour
 
     void cheats()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             foreach (var item in GameObject.FindGameObjectsWithTag("enemy"))
             {
                 item.GetComponent<hp_system>().current_hp = 0;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.P)) {
+            transform.position = new Vector3(-530.950012f, 2f, 481f);
         }
     }
 
@@ -465,20 +473,27 @@ public class player_movement : MonoBehaviour
             movement();
 
             camera_movement();
+            
+            
+
+        if (blocking) {
+            shield.transform.position = cam.transform.forward * 1f + cam.transform.position + cam.transform.right * -.8f + cam.transform.up * -.8f;
+            shield.transform.LookAt(cam.transform.forward * 5f + shield.transform.position);
+        }
+
+            update_animations();
+
         }
         else
         {
             cam.transform.LookAt(boss.transform.position);
+            cameraVerticalRotation = cam.transform.rotation.x;
             rb.linearVelocity = Vector3.zero;
+            transform.LookAt(boss.transform.position);
+            //transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.y,0));
         }
 
-        update_animations();
-
-        if (blocking) {
-            attack_box.transform.position = cam.transform.forward * 2f + cam.transform.position;
-            attack_box.transform.LookAt(cam.transform.forward * 5f + cam.transform.position);
-            attack_box.transform.Rotate(0, 0, -45);
-        }
+        
 
     }
 
@@ -545,7 +560,7 @@ public class player_movement : MonoBehaviour
         {
             if (weapon_id == 1)
             {
-                if (!attacking & context.performed)
+                if (!attacking & context.performed & !blocking)
                 {
                     melee_attack();
                 }
@@ -607,6 +622,7 @@ public class player_movement : MonoBehaviour
         if (context.performed)
         {
             weapon_id += 1;
+            blocking = false;
             if (weapon_id >= 3)
             {
                 weapon_id = 1;
@@ -616,7 +632,7 @@ public class player_movement : MonoBehaviour
 
     public void on_camera_input(InputAction.CallbackContext context)
     {
-        camera_input = context.ReadValue<Vector2>() * settings.mouse_sensitivy;
+        camera_input = context.ReadValue<Vector2>() * settings.mouse_sensitivty;
     }
 
     public void on_interaction_input(InputAction.CallbackContext context)

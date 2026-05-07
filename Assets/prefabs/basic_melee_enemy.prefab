@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3955171d3a8c3419fb529f48e0530d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::damage_system
-  damage: 1
+  damage: 4
   source: enemy
 --- !u!1 &8404277000590108161
 GameObject:

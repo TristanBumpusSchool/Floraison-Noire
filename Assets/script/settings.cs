@@ -9,7 +9,7 @@ public class settings : MonoBehaviour
 {
 
     static public bool open_settings = false;
-    static public float mouse_sensitivy = 1f;
+    static public float mouse_sensitivty = 1f;
     public Slider sensitivy;
     Vector3 start_pos = Vector3.zero;
     public GameObject first_button;
@@ -19,6 +19,8 @@ public class settings : MonoBehaviour
     public Slider master_slider;
     public Slider music_slider;
     public Slider sfx_slider;
+
+    public GameObject settings_visuals;
 
     public AudioMixer audio_mixer;
 
@@ -47,7 +49,7 @@ public class settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouse_sensitivy = sensitivy.value;
+        mouse_sensitivty = sensitivy.value;
         if(event_system.GetComponent<EventSystem>().currentSelectedGameObject != null ) 
         {
             if (event_system.GetComponent<EventSystem>().currentSelectedGameObject.name == "graphics" & current_section != 0) {
@@ -83,7 +85,6 @@ public class settings : MonoBehaviour
     public void click_resume()
     {
         open_settings = false;
-        transform.position = new Vector3(0, 10000, 0);
         first_button = event_system.GetComponent<EventSystem>().currentSelectedGameObject;
         general_manager.pausible_menu_open -= 1;
         if (general_manager.last_opened_ui != null)
@@ -111,6 +112,7 @@ public class settings : MonoBehaviour
             if (!open_settings)
             { 
                 open_settings = true;
+                settings_visuals.SetActive(true);
                 event_system.GetComponent<EventSystem>().SetSelectedGameObject(first_button);
                 transform.position = start_pos;
                 general_manager.pausible_menu_open += 1;
@@ -119,7 +121,7 @@ public class settings : MonoBehaviour
             else if (open_settings)
             {
                 open_settings = false;
-                transform.position = new Vector3(0, 10000, 0);
+                settings_visuals.SetActive(false);
                 first_button = event_system.GetComponent<EventSystem>().currentSelectedGameObject;
                 general_manager.pausible_menu_open -= 1;
                 if(general_manager.last_opened_ui != null)

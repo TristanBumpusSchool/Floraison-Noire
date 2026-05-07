@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class enemy_ai : MonoBehaviour
 {
 
-    //Diffrent states : 0 = staggerd, 1 = idle/wander, 2 = fallow player, 3 = attack, 4 = go to last location
+    //Diffrent states : 0 = staggerd, 1 = idle/wander, 2 = fallow player, 3 = attack, 4 = go to last location, 5 = launching rock
     public int current_state = 1;
 
 
@@ -20,7 +20,6 @@ public class enemy_ai : MonoBehaviour
     public float base_damage = 1;
     public damage_system damage_script;
     public bool staggered = false;
-    Vector3 random_pos = Vector3.zero;
 
     [Header("Range")]
     public float attack_range = 2;
@@ -30,9 +29,11 @@ public class enemy_ai : MonoBehaviour
     [Header("Lights")]
     public LightDetector light_detector;
 
-    /// <summary>
+    NavMeshAgent nav_agent;
+
+
+
     /// Switchs between the diffrent stats of the enemy
-    /// </summary>
     void state_manager()
     {
         if (staggered) {
@@ -55,8 +56,8 @@ public class enemy_ai : MonoBehaviour
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
             RaycastHit ray;
-            Physics.Raycast(transform.position + (transform.up * 1f), (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
-            Debug.DrawRay(transform.position + (transform.up * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
+            Physics.Raycast(transform.position, (player.transform.position - transform.position), out ray, Vector3.Distance(player.transform.position, transform.position));
+            //Debug.DrawRay(transform.position + (transform.up * 1f), (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
             if (ray.collider != null)
             {
                 if (ray.collider.tag == "player")
@@ -93,11 +94,17 @@ public class enemy_ai : MonoBehaviour
         player = GameObject.FindWithTag("player");
         staggered = false;
         GetComponent<Collider>().enabled = true;
-        random_pos = new Vector3(Random.Range(0f,1f),0,Random.Range(0f, 1f)).normalized;
 
         GetComponent<hp_system>().max_hp = max_health;
         GetComponent<hp_system>().current_hp = max_health;
         current_state = 1;
+
+        //if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+        //{
+        //    // 2. Teleport the Agent's logic to that point
+        //    GetComponent<NavMeshAgent>().Warp(hit.position);
+        //    GetComponent<NavMeshAgent>().enabled = true;
+        //}
     }
 
     void Start()
@@ -107,20 +114,25 @@ public class enemy_ai : MonoBehaviour
 
         GetComponent<hp_system>().max_hp = max_health;
         GetComponent<hp_system>().current_hp = max_health;
+        nav_agent = GetComponent<NavMeshAgent>();
     }
 
     private void OnDisable()
     {
-        GetComponent<NavMeshAgent>().enabled = false;
+        nav_agent.enabled = false;
     }
 
     private void Update()
     {
-        if (!GetComponent<NavMeshAgent>().enabled)
+        if (!nav_agent.enabled)
         {
-            GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<NavMeshAgent>().Warp(transform.position);
-            GetComponent<NavMeshAgent>().isStopped = false;
+            nav_agent.enabled = true;
+            nav_agent.Warp(transform.position);
+            nav_agent.isStopped = false;
+        }
+        if (!nav_agent.isOnNavMesh)
+        {
+            nav_agent.Warp(transform.position);
         }
     }
 
@@ -135,40 +147,53 @@ public class enemy_ai : MonoBehaviour
 
         if (current_state == 2 & !GetComponent<Animator>().GetBool("attack"))
         {
-            if (!GetComponent<NavMeshAgent>().isActiveAndEnabled || !GetComponent<NavMeshAgent>().isOnNavMesh)
+            if (!nav_agent.isActiveAndEnabled || !nav_agent.isOnNavMesh)
             {
                 return;
             }
             player_last_position = player.transform.position;
             if (light_detector.SampledLightAmount > 2f) 
             {
-                GetComponent<NavMeshAgent>().isStopped = false;
-                GetComponent<NavMeshAgent>().destination = player.transform.position + random_pos;
-                GetComponent<NavMeshAgent>().speed = speed;
+                if (nav_agent.isOnNavMesh)
+                {
+                    nav_agent.isStopped = false;
+                    nav_agent.destination = player.transform.position;
+                    nav_agent.speed = speed;
+                }
             }
             else
             {
-                GetComponent<NavMeshAgent>().isStopped = false;
-                GetComponent<NavMeshAgent>().destination = player.transform.position + random_pos; ;
-                GetComponent<NavMeshAgent>().speed = speed/2;
+                if (nav_agent.isOnNavMesh)
+                {
+                    nav_agent.isStopped = false;
+                    nav_agent.destination = player.transform.position;
+                    nav_agent.speed = speed / 2;
+                }
             }
         }
         else if(current_state == 4)
         {
-            if (!GetComponent<NavMeshAgent>().isActiveAndEnabled || !GetComponent<NavMeshAgent>().isOnNavMesh)
+            if (!nav_agent.isActiveAndEnabled || !nav_agent.isOnNavMesh)
             {
                 return;
             }
-            GetComponent<NavMeshAgent>().isStopped = false;
-            GetComponent<NavMeshAgent>().destination = player_last_position;
-            GetComponent<NavMeshAgent>().speed = speed;
-            if(Vector3.Distance(player_last_position, transform.position) < 1) {
-                current_state = 1;
+            if (nav_agent.isOnNavMesh)
+            {
+                nav_agent.isStopped = false;
+                nav_agent.destination = player_last_position;
+                nav_agent.speed = speed;
+                if (Vector3.Distance(player_last_position, transform.position) < 1)
+                {
+                    current_state = 1;
+                }
             }
         }
         else
         {
-            GetComponent<NavMeshAgent>().isStopped = true;
+            if (nav_agent.isOnNavMesh)
+            {
+                nav_agent.isStopped = true;
+            }
         }
         if (current_state == 3)
         {
@@ -196,6 +221,7 @@ public class enemy_ai : MonoBehaviour
     public void end_staggered()
     {
         staggered = false;
+        current_state = 3;
     }
 
     public void stagger()
