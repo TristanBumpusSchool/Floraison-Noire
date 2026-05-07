@@ -55,6 +55,13 @@ public class boss_ai : MonoBehaviour
         {
             current_state = 1;
         }
+        if (GetComponent<hp_system>().current_hp <= 0) {
+            current_state = 0;
+            GetComponentInChildren<Animator>().SetInteger("attack", 0);
+        }
+
+        GetComponentInChildren<Animator>().SetInteger("state",current_state);
+
     }
 
     void start_ai()

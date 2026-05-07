@@ -14,6 +14,7 @@ public class main_menu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Screen.SetResolution(1920, 1080, Screen.fullScreen);
         if (message != null)
         {
