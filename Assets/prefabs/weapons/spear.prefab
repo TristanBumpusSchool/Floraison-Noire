@@ -50,6 +50,8 @@ MonoBehaviour:
   dist: 3.6
   texture: {fileID: 8400000, guid: df8253d446ecf934da539e4c55a38922, type: 2}
   weapon_animation: {fileID: 7400000, guid: 7a10c2788f3d4844c81e9c561fe2e9fd, type: 2}
+  pos: {x: 0.0384, y: -0.046, z: -0.008}
+  rot: {x: 80.000015, y: 180, z: 180}
 --- !u!1 &8725578759353452709
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class boss_ai : MonoBehaviour
 {
 
-    //Diffrent states : 1 = idle/wander 2 = fallow player, 3 = attack, 4 = go to last location
+    //Diffrent states : 1 = idle/wander 2 = fallow player, 3 = attack, 4 = go to last location, 5 = throw rock
     public int current_state = -1;
     int last_attack = 0;
 
@@ -23,6 +23,9 @@ public class boss_ai : MonoBehaviour
     [Header("Range")]
     public float attack_range = 2;
     public float follow_range = 100;
+    public GameObject rock;
+    public GameObject current_rock;
+    public Transform rock_fallow;
     Vector3 player_last_position = Vector3.zero;
 
     [Header("Lights")]
@@ -36,15 +39,24 @@ public class boss_ai : MonoBehaviour
     /// </summary>
     void state_manager()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
+        if (current_state == 5) { 
+            
+        }
+        else if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
             current_state = 3;
+            if(IsInvoking("start_throw")) {
+                CancelInvoke("start_throw");
+            }
 
         }
         else if (Vector3.Distance(player.transform.position, transform.position) < follow_range)
         {
             //Debug.DrawRay(transform.position, (player.transform.position - transform.position) * ray.distance, Color.red, 5f);
             current_state = 2;
+            if (!IsInvoking("start_throw")) {
+                Invoke("start_throw", Random.Range(3f,10f));
+            }
             
         }
         else if(current_state == 2 & Vector3.Distance(player.transform.position, transform.position) > follow_range || current_state == 4)
@@ -93,7 +105,16 @@ public class boss_ai : MonoBehaviour
     {
 
         //GetComponent<NavMeshAgent>().enabled = true;
-        if (current_state == 2 & GetComponentInChildren<Animator>().GetInteger("attack") == 0)
+        if (current_state == 5) {
+            GetComponent<NavMeshAgent>().speed = 0;
+            GetComponentInChildren<Animator>().SetInteger("attack", 5);
+            if (!IsInvoking("start_attack_timer") & !IsInvoking("end_attack"))
+            {
+                Invoke("create_rock", .8f);
+                Invoke("start_attack_timer", .3f);
+            }
+        }
+        else if (current_state == 2 & GetComponentInChildren<Animator>().GetInteger("attack") == 0)
         {
             player_last_position = player.transform.position;
             if (light_detector.SampledLightAmount > .75f)
@@ -151,11 +172,24 @@ public class boss_ai : MonoBehaviour
     public void end_attack()
     {
         GetComponentInChildren<Animator>().SetInteger("attack", 0);
+        current_state = 2;
+    }
+
+    public void start_throw() {
+        current_state = 5;
+    }
+
+    public void create_rock()
+    {
+        current_rock = Instantiate(rock);
+        current_rock.transform.position = rock_fallow.position;
+        current_rock.GetComponent<enemy_rock>().fallow = rock_fallow;
+        current_rock.GetComponent<enemy_rock>().target = player.transform.position;
+        current_rock.GetComponent<enemy_rock>().source = "boss";
     }
 
     void start_attack_timer()
     {
-        print(GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Invoke("end_attack", GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).length - .3f);
     }
 }

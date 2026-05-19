@@ -19,6 +19,13 @@ public class interactble : MonoBehaviour
     void Update()
     {
 
+        if(player == null)
+        {
+            player = GameObject.FindWithTag("player");
+        }
+
+        print(player);
+
         if (player.GetComponent<player_movement>().interaction_object == gameObject) { 
             ui.SetActive(true);
         }

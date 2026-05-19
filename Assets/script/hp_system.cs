@@ -16,6 +16,7 @@ public class hp_system : MonoBehaviour
 
     void win()
     {
+
         general_manager.win_message = "Tu gagne";
         SceneManager.LoadScene(2);
     }
@@ -58,9 +59,14 @@ public class hp_system : MonoBehaviour
             if (hp_ui.GetComponent<Slider>().maxValue != max_hp)
             {
                 hp_ui.GetComponent<Slider>().maxValue = max_hp;
+                //hp_ui.GetComponent<Slider>()
             }
-            hp_ui.GetComponent<Slider>().value = current_hp;
-            
+            if (hp_ui.GetComponent<Slider>().value != current_hp)
+            {
+                hp_ui.GetComponent<Slider>().value = Mathf.Lerp(hp_ui.GetComponent<Slider>().value, current_hp, .1f);
+            }
+
+
         }
 
     }

@@ -32,10 +32,8 @@ public class bullet : MonoBehaviour
     {
 
         Invoke("delete", 10000);
-
         rb.linearVelocity = direction * speed;
         Invoke("start_colliding", .1f);
-        transform.LookAt(rb.linearVelocity + transform.position);
         
         float distance = Mathf.Infinity;
         
