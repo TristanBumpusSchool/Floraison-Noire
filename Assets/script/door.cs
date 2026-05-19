@@ -7,6 +7,7 @@ public class door : MonoBehaviour
     public GameObject visible_door;
     public GameObject enemies_spawners_to_activate;
     public AudioClip music_change;
+    public string dialogue;
     bool open = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +43,11 @@ public class door : MonoBehaviour
             if(music_change != null)
             {
                 other.gameObject.transform.GetChild(7).GetComponent<AudioSource>().clip = music_change;
+            }
+            if(dialogue != "")
+            {
+                GameObject.FindWithTag("dialogue").GetComponent<dialogue_system>().text_to_display = dialogue;
+                dialogue = "";
             }
         }
     }

@@ -15,6 +15,7 @@ TagManager:
   - weapon
   - event_system
   - boss
+  - dialogue
   layers:
   - Default
   - TransparentFX

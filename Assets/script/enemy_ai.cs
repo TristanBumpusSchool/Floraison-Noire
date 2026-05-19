@@ -24,6 +24,9 @@ public class enemy_ai : MonoBehaviour
     [Header("Range")]
     public float attack_range = 2;
     public float follow_range = 100;
+    public GameObject rock;
+    public GameObject current_rock;
+    public Transform rock_fallow;
     Vector3 player_last_position = Vector3.zero;
 
     [Header("Lights")]
@@ -38,6 +41,10 @@ public class enemy_ai : MonoBehaviour
     {
         if (staggered) {
             current_state = 0;
+            if (current_rock != null) { 
+                current_rock.GetComponent<enemy_rock>().direction = -transform.up;
+                current_rock.GetComponent<enemy_rock>().speed = .1f;
+            }
         }
         else if (Vector3.Distance(player.transform.position, transform.position) < attack_range)
         {
@@ -152,7 +159,7 @@ public class enemy_ai : MonoBehaviour
                 return;
             }
             player_last_position = player.transform.position;
-            if (light_detector.SampledLightAmount > 2f) 
+            if (light_detector.SampledLightAmount > 1.4f) 
             {
                 if (nav_agent.isOnNavMesh)
                 {
@@ -211,6 +218,16 @@ public class enemy_ai : MonoBehaviour
 
         
 
+    }
+
+
+
+    public void create_rock()
+    {
+        current_rock = Instantiate(rock);
+        current_rock.transform.position = rock_fallow.position;
+        current_rock.GetComponent<enemy_rock>().fallow = rock_fallow;
+        current_rock.GetComponent<enemy_rock>().target = player.transform.position;
     }
 
     public void end_attack()

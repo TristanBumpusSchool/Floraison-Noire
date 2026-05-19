@@ -7,6 +7,8 @@ public class weapon_system : MonoBehaviour
     public float dist;
     public RenderTexture texture;
     public AnimationClip weapon_animation;
+    public Vector3 pos;
+    public Vector3 rot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

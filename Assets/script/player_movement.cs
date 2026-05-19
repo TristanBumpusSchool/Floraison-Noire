@@ -321,13 +321,14 @@ public class player_movement : MonoBehaviour
             ammo_current -= bullet_cost;
             GameObject b = Instantiate(bullet);
 
-            b.transform.rotation = range_slot.transform.rotation;
+            b.transform.LookAt(range_slot.transform.GetChild(0).transform.forward * 2f);
             b.transform.parent = range_slot.transform;
             b.GetComponent<bullet>().source = "player";
-            b.transform.position = range_slot.transform.position;
+            b.transform.position = range_slot.transform.GetChild(0).transform.position;
             b.GetComponent<bullet>().direction = cam.transform.forward;
             b.GetComponent<bullet>().speed = 50;
             b.transform.GetComponent<damage_system>().source = "player";
+            b.transform.GetComponent<damage_system>().damage = range_slot.GetComponentInChildren<weapon_system>().damage + base_damage;
             b.GetComponent<bullet>().homing = bullet_homing;
             b.GetComponent<bullet>().bounces = bullet_bounce;
             current_bullet = b;
@@ -367,7 +368,7 @@ public class player_movement : MonoBehaviour
 
     void ammo_reload()
     {
-        if(light_detector.SampledLightAmount > 2)
+        if(light_detector.SampledLightAmount > 1.4)
         {
             ammo_current += 1;
             if(ammo_current > ammo_max)
@@ -380,7 +381,17 @@ public class player_movement : MonoBehaviour
 
     void update_animations()
     {
-        if (blocking) {
+        if(current_bullet != null)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName(range_slot.GetComponentInChildren<weapon_system>().weapon_animation.name))
+            {
+                anim.Play(range_slot.GetComponentInChildren<weapon_system>().weapon_animation.name);
+            }
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("null")) {
+            return;
+        }
+        else if (blocking) {
             if(!anim.GetCurrentAnimatorStateInfo(0).IsName("blocking"))
             {
                 anim.Play(animations[0].name);
@@ -401,17 +412,22 @@ public class player_movement : MonoBehaviour
     
         if(weapon_id == 2)
         {
-            range_slot.transform.position = cam.transform.forward * .5f + cam.transform.position + cam.transform.right * .5f;
-            range_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            range_slot.SetActive(true);
+            range_slot.transform.GetChild(0).transform.localPosition = range_slot.transform.GetChild(0).GetComponent<weapon_system>().pos;
+
+            range_slot.transform.GetChild(0).transform.localRotation = Quaternion.Euler(range_slot.transform.GetChild(0).GetComponent<weapon_system>().rot);
             //range_slot.transform.Rotate(0, 0, -45);
-            melee_slot.transform.position = Vector3.zero + Vector3.back;
+            melee_slot.SetActive(false);
 
         }
         else
         {
-            melee_slot.transform.position = cam.transform.forward * .75f + cam.transform.position + cam.transform.right * .75f;
-            melee_slot.transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
-            range_slot.transform.position = Vector3.zero + Vector3.back;
+            melee_slot.SetActive(true);
+            melee_slot.transform.GetChild(0).transform.localPosition = melee_slot.transform.GetChild(0).GetComponent<weapon_system>().pos;
+
+            //melee_slot.transform.GetChild(0).transform.LookAt(cam.transform.forward * 2f + cam.transform.position);
+            melee_slot.transform.GetChild(0).transform.localRotation = Quaternion.Euler(melee_slot.transform.GetChild(0).GetComponent<weapon_system>().rot);
+            range_slot.SetActive(false);
         }
     }
 
@@ -619,7 +635,7 @@ public class player_movement : MonoBehaviour
 
     public void on_switch_input(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed & current_bullet == null)
         {
             weapon_id += 1;
             blocking = false;

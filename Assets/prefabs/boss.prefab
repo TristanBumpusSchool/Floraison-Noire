@@ -227,6 +227,9 @@ MonoBehaviour:
   damage_script: {fileID: 3163657551736619586}
   attack_range: 4
   follow_range: 100
+  rock: {fileID: 8707507294199623242, guid: 0adb8935146cfd942b216fb8340ff8a8, type: 3}
+  current_rock: {fileID: 0}
+  rock_fallow: {fileID: 2002833038874445981}
   light_detector: {fileID: 5675595381306955948}
 --- !u!195 &7846088324021487331
 NavMeshAgent:
@@ -4578,6 +4581,11 @@ PrefabInstance:
       addedObject: {fileID: 1793730028043932685}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b359c330fa6f93c4490cdae0a0d22a17, type: 3}
+--- !u!4 &2002833038874445981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8064368254314067108, guid: b359c330fa6f93c4490cdae0a0d22a17, type: 3}
+  m_PrefabInstance: {fileID: 8367998422310239289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8334935063878294482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b359c330fa6f93c4490cdae0a0d22a17, type: 3}
