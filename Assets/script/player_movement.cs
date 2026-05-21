@@ -662,12 +662,12 @@ public class player_movement : MonoBehaviour
         }
     }
 
-    public void TrailOn()
+    public void trail_on()
     {
         melee_slot.transform.GetChild(0).GetComponent<TrailRenderer>().emitting = true;
     }
 
-    public void TrailOff()
+    public void trail_off()
     {
         melee_slot.transform.GetChild(0).GetComponent<TrailRenderer>().emitting = false;
     }

@@ -30,8 +30,8 @@ public class bullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
-        Invoke("delete", 10000);
+        GetComponent<TrailRenderer>().enabled = true;
+        Invoke("delete", 10);
         rb.linearVelocity = direction * speed;
         Invoke("start_colliding", .1f);
         
